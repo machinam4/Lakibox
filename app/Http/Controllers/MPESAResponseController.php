@@ -72,7 +72,7 @@ class MPESAResponseController extends Controller
             $BETS = new BetsController;
             $bet_result = $BETS->placeBet($bet->BillRefNumber);
             $sms = "Umepoteza!\n**\nUlichagua $bet->BillRefNumber\n**\nBox 1- " . $bet_result['box1'] . "\nBox 2- " . $bet_result['box2'] . "\nBox 3- " . $bet_result['box3'] . "\nBox 4- " . $bet_result['box4'] . "\nBox 5- " . $bet_result['box5'] . "\n**\n**\nChagua tena USHINDE.\nSTOP?*456*9*5#";
-            $SMS = new SMSController;
+            $SMS = new LidenController;
             $sendSMS = $SMS->sendSMS($sms, $bet->MSISDN);
         } catch (\Throwable $th) {
             return $th;

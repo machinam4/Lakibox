@@ -58,14 +58,14 @@ class BetsController extends Controller
     public function placeBet(string $box)
     {
         $prizes = [
-            number_format(round(random_int(10, 1000), -3)),
-            number_format(round(random_int(100, 9999999), -5)),
-            number_format(round(random_int(10, 100), -2)),
-            number_format(round(random_int(100, 999999), -4)),
-            number_format(round(random_int(1, 9999), -2)),
+            number_format(round(random_int(50000, 100000), -4)),
+            number_format(round(random_int(100000, 199999), -5)),
+            number_format(round(random_int(200000, 299999), -5)),
+            number_format(round(random_int(300000, 399999), -5)),
+            number_format(round(random_int(400000, 450000), -5)),
             "SmartPhone",
             "Motorbike",
-            number_format(random_int(100, 1000)) . " Voucher",
+            // number_format(random_int(100, 1000)) . " Voucher",
             "Smart TV",
             "Water Dispenser",
             "Standing Cooker",
