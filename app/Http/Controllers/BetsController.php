@@ -20,11 +20,11 @@ class BetsController extends Controller
             "PartyA" => $phoneNumber,
             "PartyB" => env('MPESA_SHORTCODE'),
             "PhoneNumber" => $phoneNumber,
-            "CallBackURL" => env('MPESA_CALLBACK'),
+            "CallBackURL" =>  url('') . env('MPESA_CALLBACK'),
             "AccountReference" => "Box $box",
             "TransactionDesc" => "Lucky Box " . $box
         ];
-        // dd($data);
+        dd($data);
         // dd(response()->json($data, 200));
 
         // TO:DO wait for mpesa to finish transaction the send notifi to user
@@ -32,6 +32,7 @@ class BetsController extends Controller
         try {
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data);
+            dd($response);
             if ($response->ResponseCode !== "0") {
                 return response()->json("failed", 200);
             } else {
