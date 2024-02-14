@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deposits;
+use App\Models\Players;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -14,7 +15,7 @@ class MPESAResponseController extends Controller
         // $data = json_decode($request->getContent());
         // Log::info('confirmation hit');
         // Log::info($request->all());
-        Deposits::Create($request->all());
+        Players::Create($request->all());
 
         return "success";
     }

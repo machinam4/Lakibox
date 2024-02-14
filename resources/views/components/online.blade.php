@@ -9,7 +9,7 @@
                         <h6 class="m-b-20">Total Today</h6>
                         <h2 class="text-left"><span id="totalAmount">Loading...</span></h2>
                         <p class="m-b-0 text-right">Shortcode:
-                            555656</p>
+                            {{ env('SMS_SHORTCODE') }}</p>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>Time</th>
-                                    <th>FirstName</th>
+                                    {{-- <th>FirstName</th> --}}
                                     <th>Phone</th>
                                     <th>BOX CHOICE</th>
                                     <th>Amount</th>
@@ -36,7 +36,7 @@
                                 @foreach ($players as $player)
                                     <tr>
                                         <th>{{ $player->TransTime }}</th>
-                                        <th>{{ $player->player->FirstName }}</th>
+                                        {{-- <th>{{ $player->player->FirstName }}</th> --}}
                                         <th>{{ $player->MSISDN }}</th>
                                         <th>{{ $player->BillRefNumber }}</th>
                                         <th>{{ $player->TransAmount }}</th>
@@ -78,7 +78,7 @@
                         data.new_players.forEach(player => {
                             t.row.add([
                                 player.TransTime,
-                                player.player.FirstName,
+                                // player.player.FirstName,
                                 player.MSISDN,
                                 player.BillRefNumber,
                                 player.TransAmount,
