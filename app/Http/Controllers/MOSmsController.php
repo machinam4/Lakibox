@@ -36,7 +36,7 @@ class MOSmsController extends Controller
             $funds = $DEPOSIT->depositfund($intValue, $phoneNumber);
         } else {
             // If the keyword "Box" is not found, provide a generic response
-            Log::info('Received SMS without keyword "Box": ' . $message);
+            // Log::info('Received SMS without keyword "Box": ' . $message);
             // Respond to the SMS
             $sms = "Samahani! Umekosea.\n**\nUlichagua $message.\n**\nCheza kwa kuchagua NUMBER (1-5).\n**\nMfano: 1\n**\nChagua TENA USHINDE!\n1:BOX 1\n2:BOX 2\n3:BOX 3\n4:BOX4\n5:BOX5\n**\**\nCheza Tena  uingie kwa DRAW ya leo!\nSTOP*456*9*5#\n";
             // $SMS = new SMSController;

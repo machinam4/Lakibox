@@ -41,7 +41,7 @@ class SMSController extends Controller
 
         // Execute cURL session
         $response = curl_exec($ch);
-        Log::info($response);
+        // Log::info($response);
 
         // Check for cURL errors
         if (curl_errno($ch)) {

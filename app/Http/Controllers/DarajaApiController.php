@@ -39,7 +39,7 @@ class DarajaApiController extends Controller
         // Log::info($data_string);
         $curl_response = curl_exec($ch);
         curl_close($ch);
-        Log::info($curl_response);
+        // Log::info($curl_response);
         return $curl_response;
     }
     public function registerUrl() //active
@@ -50,7 +50,7 @@ class DarajaApiController extends Controller
             'ConfirmationURL' => url('') . '/api/c2b/confirmation',
             'ValidationURL' => url('') . '/api/c2b/validation'
         );
-        Log::info($body);
+        // Log::info($body);
         $mpesaUrl = env('MPESA_ENV') == 0 ? 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl' : 'https://api.safaricom.co.ke/mpesa/c2b/v2/registerurl';
         $response = json_decode($this->sendRequest($mpesaUrl, $body));
         return $response;
