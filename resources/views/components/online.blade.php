@@ -32,6 +32,20 @@
                                     {{-- <th>Account</th> --}}
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach ($players as $player)
+                                    <tr>
+                                        <th>{{ $player->TransTime }}</th>
+                                        <th>{{ $player->player->FirstName }}</th>
+                                        <th>{{ $player->MSISDN }}</th>
+                                        <th>{{ $player->BillRefNumber }}</th>
+                                        <th>{{ $player->TransAmount }}</th>
+                                        <th>{{ $player->TransID }}</th>
+                                        <th>{{ $player->BusinessShortCode }}</th>
+                                        {{-- <th>Account</th> --}}
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>

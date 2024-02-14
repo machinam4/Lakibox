@@ -23,7 +23,8 @@ class DashboardController extends Controller
     {
         // return view('session');
         $last_index = Deposits::latest()->first();
-        return view('players', ['last_index' => $last_index->id]);
+        $players = Deposits::whereDate('TransTime', date('Y-m-d'))->where('ResultCode', 0)->with('player')->limit(20)->get();
+        return view('players', ['last_index' => $last_index->id, "players" => $players]);
     }
 
     public function online($index)
