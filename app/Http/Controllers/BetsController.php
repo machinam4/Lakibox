@@ -24,7 +24,7 @@ class BetsController extends Controller
             "AccountReference" => "Box $box",
             "TransactionDesc" => "Lucky Box " . $box
         ];
-        dd($data);
+        // dd($data);
         // dd(response()->json($data, 200));
 
         // TO:DO wait for mpesa to finish transaction the send notifi to user
