@@ -56,70 +56,84 @@ class BetsController extends Controller
 
     public function placeBet(string $box)
     {
+        $prizes = [
+            number_format(round(random_int(10, 1000), -3)),
+            number_format(round(random_int(100, 9999999), -5)),
+            number_format(round(random_int(10, 100), -2)),
+            number_format(round(random_int(100, 999999), -4)),
+            number_format(round(random_int(1, 9999), -2)),
+            "SmartPhone",
+            "Motorbike",
+            number_format(random_int(100, 1000)) . " Voucher",
+            "Smart TV",
+            "Water Dispenser",
+            "Standing Cooker",
+            number_format(0)
+        ];
         // send response
         switch ($box) {
-            case 1:
+            case "Box 1":
                 $values = [
                     'box1' => number_format(0),
-                    'box2' => number_format(round(random_int(10, 1000), -3)),
-                    'box3' => number_format(round(random_int(100, 9999999), -5)),
-                    'box4' => number_format(round(random_int(10, 100), -2)),
-                    'box5' => number_format(round(random_int(100, 999999), -4)),
-                    'box6' => number_format(round(random_int(1, 9999), -2)),
+                    'box2' => $prizes[array_rand($prizes)],
+                    'box3' => $prizes[array_rand($prizes)],
+                    'box4' => $prizes[array_rand($prizes)],
+                    'box5' => $prizes[array_rand($prizes)],
+                    'box6' => $prizes[array_rand($prizes)],
                 ];
                 return $values;
                 break;
-            case 2:
+            case "Box 2":
                 $values = [
-                    'box1' => number_format(round(random_int(10, 1000), -3)),
+                    'box1' => $prizes[array_rand($prizes)],
                     'box2' => number_format(0),
-                    'box3' => number_format(round(random_int(100, 9999999), -5)),
-                    'box4' => number_format(round(random_int(10, 100), -2)),
-                    'box5' => number_format(round(random_int(100, 999999), -4)),
-                    'box6' => number_format(round(random_int(1, 9999), -2)),
+                    'box3' => $prizes[array_rand($prizes)],
+                    'box4' => $prizes[array_rand($prizes)],
+                    'box5' => $prizes[array_rand($prizes)],
+                    'box6' => $prizes[array_rand($prizes)],
                 ];
                 return $values;
                 break;
-            case 3:
+            case "Box 3":
                 $values = [
-                    'box1' => number_format(round(random_int(100, 9999999), -5)),
-                    'box2' => number_format(round(random_int(10, 1000), -3)),
-                    'box3' => 0,
-                    'box4' => number_format(round(random_int(10, 100), -2)),
-                    'box5' => number_format(round(random_int(100, 999999), -4)),
-                    'box6' => number_format(round(random_int(1, 9999), -2)),
+                    'box1' => $prizes[array_rand($prizes)],
+                    'box2' => $prizes[array_rand($prizes)],
+                    'box3' => number_format(0),
+                    'box4' => $prizes[array_rand($prizes)],
+                    'box5' => $prizes[array_rand($prizes)],
+                    'box6' => $prizes[array_rand($prizes)],
                 ];
                 return $values;
                 break;
-            case 4:
+            case "Box 4":
                 $values = [
-                    'box1' => number_format(round(random_int(10, 100), -2)),
-                    'box2' => number_format(round(random_int(10, 1000), -3)),
-                    'box3' => number_format(round(random_int(100, 9999999), -5)),
+                    'box1' => $prizes[array_rand($prizes)],
+                    'box2' => $prizes[array_rand($prizes)],
+                    'box3' => $prizes[array_rand($prizes)],
                     'box4' => number_format(0),
-                    'box5' => number_format(round(random_int(100, 999999), -4)),
-                    'box6' => number_format(round(random_int(1, 9999), -2)),
+                    'box5' => $prizes[array_rand($prizes)],
+                    'box6' => $prizes[array_rand($prizes)],
                 ];
                 return $values;
                 break;
-            case 5:
+            case "Box 5":
                 $values = [
-                    'box1' => number_format(round(random_int(100, 999999), -4)),
-                    'box2' => number_format(round(random_int(10, 1000), -3)),
-                    'box3' => number_format(round(random_int(100, 9999999), -5)),
-                    'box4' => number_format(round(random_int(10, 100), -2)),
+                    'box1' => $prizes[array_rand($prizes)],
+                    'box2' => $prizes[array_rand($prizes)],
+                    'box3' => $prizes[array_rand($prizes)],
+                    'box4' => $prizes[array_rand($prizes)],
                     'box5' => number_format(0),
-                    'box6' => number_format(round(random_int(1, 9999), -2)),
+                    'box6' => $prizes[array_rand($prizes)],
                 ];
                 return $values;
                 break;
-            case 6:
+            case "Box 6":
                 $values = [
-                    'box1' => number_format(round(random_int(1, 9999), -2)),
-                    'box2' => number_format(round(random_int(10, 1000), -3)),
-                    'box3' => number_format(round(random_int(100, 9999999), -5)),
-                    'box4' => number_format(round(random_int(10, 100), -2)),
-                    'box5' => number_format(round(random_int(100, 999999), -4)),
+                    'box1' => $prizes[array_rand($prizes)],
+                    'box2' => $prizes[array_rand($prizes)],
+                    'box3' => $prizes[array_rand($prizes)],
+                    'box4' => $prizes[array_rand($prizes)],
+                    'box5' => $prizes[array_rand($prizes)],
                     'box6' => number_format(0),
                 ];
                 return $values;

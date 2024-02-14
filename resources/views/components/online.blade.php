@@ -6,18 +6,16 @@
             <div class="col-md-6">
                 <div class="card bg-c-blue order-card">
                     <div class="card-body">
-                        <h6 class="m-b-20">Total This Session</h6>
+                        <h6 class="m-b-20">Total Today</h6>
                         <h2 class="text-left"><span id="totalAmount">Loading...</span></h2>
-                        <p class="m-b-0 text-right">Started At
-                            {{ auth()->user()->sessions->last()->created_at->format('H:i:s') }} <span
-                                class="float-left">Shortcode:
-                                {{ auth()->user()->sessions->last()->shortcode }}</span></p>
+                        <p class="m-b-0 text-right">Shortcode:
+                            555656</p>
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}</h5>
+                    <h5>{{ auth()->user()->username }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="dt-responsive table-responsive">
@@ -25,8 +23,9 @@
                             <thead>
                                 <tr>
                                     <th>Time</th>
-                                    <th>Names</th>
+                                    <th>FirstName</th>
                                     <th>Phone</th>
+                                    <th>BOX CHOICE</th>
                                     <th>Amount</th>
                                     <th>TransCode</th>
                                     <th>Paybill Number</th>
@@ -49,33 +48,37 @@
     <script>
         $(document).ready(function() {
             var index = {{ $last_index }};
+
             var t = $('#add-row-table').DataTable({
                 order: [
                     [0, 'desc']
                 ],
             });
-            setInterval(() => {
-                // [ Add Rows ]
-                $.get('online/' + index, function(data) {
-                    $("#totalAmount").html(data.totalAmount)
-                    data.new_players.forEach(player => {
-                        t.row.add([
-                            player.TransTime,
-                            player.FirstName,
-                            player.MSISDN,
-                            player.TransAmount,
-                            player.TransID,
-                            player.BusinessShortCode,
-                            // data
-                        ]).draw(false);
-                        index = player.id;
-                    });
 
-                })
+            setInterval(() => {
+                if (index > 1) {
+                    // [ Add Rows ]
+                    $.get('online/' + index, function(data) {
+                        $("#totalAmount").html(data.totalAmount)
+                        console.log(data);
+                        data.new_players.forEach(player => {
+                            t.row.add([
+                                player.TransTime,
+                                player.player.FirstName,
+                                player.MSISDN,
+                                player.BillRefNumber,
+                                player.TransAmount,
+                                player.TransID,
+                                player.BusinessShortCode,
+                                // data
+                            ]).draw(false);
+                            index = player.id;
+                        });
+
+                    })
+                }
 
             }, 5000);
-
-            setTimeout(function() {})
 
         })
     </script>

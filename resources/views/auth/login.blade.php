@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>RidhishaJamii - Login To Dashboard</title>
+    <title>LAKIBOX - Login To Dashboard</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -15,9 +15,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="RidhishaJamii, by evoton.co.ke, is the ultimate Mpesa Dashboard." />
-    <meta name="keywords"
-        content="RidhishaJamii, Ridhisha, Evoton, evoton.co.ke, evoton systems, evoton softwares, admin templates,">
+    <meta name="description" content="LAKIBOX, by evoton.co.ke, is the ultimate Mpesa Dashboard." />
+    <meta name="keywords" content="LAKIBOX, Evoton, evoton.co.ke, evoton systems, evoton softwares, admin templates,">
     <meta name="author" content="evoton.co.ke" />
 
     <!-- Favicon icon -->
@@ -41,12 +40,22 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h2 class="mb-4">Welcome to <span class="text-c-blue">Ridhisha Jamii</span></h2>
-                        <p>Login to Ridhisha Jamii to access your account details.</p>
+                        <h2 class="mb-4">Welcome to <span class="text-c-blue">LAKIBOX</span></h2>
+                        <p>Login to Lakibox to access your account details.</p>
                         <div class="toggle-block">
                             <ol class="position-relative carousel-indicators justify-content-start">
                                 <li class="active"></li>
+
                             </ol>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form action="{{ Route('login') }}" method="post">
                                 @csrf
                                 <div class="form-group mb-2">
@@ -66,7 +75,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 d-none d-md-block">
-                    <img src="{{ asset('assets/images/auth/Ridhishajamii-auth-logo.png') }}" alt=""
+                    <img src="{{ asset('assets/images/auth/Lakiboxicon.webp') }}" alt=""
                         class="img-fluid bd-placeholder-img bd-placeholder-img-lg d-block w-100">
                 </div>
             </div>

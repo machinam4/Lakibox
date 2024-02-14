@@ -26,4 +26,9 @@ class Deposits extends Model
         "MiddleName",
         "LastName",
     ];
+
+    public function player()
+    {
+        return $this->hasOne(Players::class, 'TransID', 'TransID');
+    }
 }

@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
+            $table->string("TransactionType")->nullable();
+            $table->string("TransID")->nullable();
+            $table->dateTime("TransTime")->nullable();
+            $table->integer("TransAmount")->nullable();
+            $table->string("BusinessShortCode")->nullable();
+            $table->string("BillRefNumber")->nullable();
+            $table->string("InvoiceNumber")->nullable();
+            $table->integer("OrgAccountBalance")->nullable();
+            $table->string("ThirdPartyTransID")->nullable();
+            $table->string("MSISDN")->nullable();
+            $table->string("FirstName")->nullable();
             $table->timestamps();
         });
     }

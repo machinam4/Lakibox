@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DarajaApiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LidenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::middleware(['auth'])->controller(DashboardController::class)->group(function () {
     Route::get('/', 'dashboard')->name('dashboard');
+    Route::get('/players', 'players')->name('players');
+    Route::get('/online/{index}', 'online')->name('online');
 });
+Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
+
+// Route::get('/send-message', [LidenController::class, 'sendSMS']);
