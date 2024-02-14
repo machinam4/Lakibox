@@ -31,17 +31,17 @@ class MPESAResponseController extends Controller
     public function express(Request $request)
     {
         // Log::info('validation hit');
-        Log::alert($request->all());
+        // Log::alert($request->all());
         $data = $request->all();
         $stkCallback = $data["Body"]["stkCallback"];
-        $CallbackMetadata = $stkCallback["CallbackMetadata"]["Item"];
-        // dd($stkCallback["ResultCode"]);
         if ($stkCallback["ResultCode"] !== 0) {
             return  [
                 "ResultCode" => "failed",
                 "ResultDesc" => "Accept Service"
             ];
         }
+        $CallbackMetadata = $stkCallback["CallbackMetadata"]["Item"];
+        // dd($stkCallback["ResultCode"]);
         // $result = 
         // dd($result);
         try {
