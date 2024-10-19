@@ -11,7 +11,7 @@ class MOSmsController extends Controller
     {
         $data = $request->all();
         $message = $data['message'];
-        $phoneNumber = $data['msisdn'];
+        $phoneNumber = $data['mobile'];
         // Log::info($message);
         // Check if the message contains the keyword "Box"
         $box = strtolower($message); // Convert to lowercase if needed
@@ -24,11 +24,16 @@ class MOSmsController extends Controller
             // $SMS = new SMSController;
             $SMS = new LidenController;
             $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
-        } else if (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
+
+            return response()->json([
+                'result_message' => $sms,
+                'result_code' => 0,
+            ]);
+        } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
             // Extract and convert the integer part
             if (preg_match("/(\d+)/", $matches[0], $intMatches)) {
-                $intValue = (int)$intMatches[0];
+                $intValue = (int) $intMatches[0];
             }
             //    echo $intValue; // Output: "3"
 
@@ -42,8 +47,17 @@ class MOSmsController extends Controller
             // $SMS = new SMSController;
             $SMS = new LidenController;
             $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
+
+            return response()->json([
+                'result_message' => $sms,
+                'result_code' => 0,
+            ]);
         }
 
-        return response()->json("its okay", 200);
+        // return response()->json('its okay', 200);
+        return response()->json([
+            'result_message' => $sms,
+            'result_code' => 0,
+        ]);
     }
 }
