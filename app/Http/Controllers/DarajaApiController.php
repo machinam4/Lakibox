@@ -13,7 +13,7 @@ class DarajaApiController extends Controller
     {
         // *** Authorization Request in PHP ***|
         $mpesaUrl = env('MPESA_ENV') == 0 ? 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials' : 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-        Log::info(env('APP_KEY'));
+        dd(env('APP_KEY'));
         $ch = curl_init($mpesaUrl);
         curl_setopt_array(
             $ch,
@@ -26,7 +26,7 @@ class DarajaApiController extends Controller
         );
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
-        Log::info($response);
+        dd($response);
 
         return $response->access_token;
     }
