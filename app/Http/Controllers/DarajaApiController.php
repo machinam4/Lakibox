@@ -16,22 +16,25 @@ class DarajaApiController extends Controller
         $ch = curl_init($mpesaUrl);
         curl_setopt_array(
             $ch,
-            array(
-                CURLOPT_HTTPHEADER => array('Content-Type:application/json; charset=utf8'),
+            [
+                CURLOPT_HTTPHEADER => ['Content-Type:application/json; charset=utf8'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HEADER => false,
-                CURLOPT_USERPWD => env('MPESA_CONSUMER_KEY') . ':' . env('MPESA_CONSUMER_SECRET')
-            )
+                CURLOPT_USERPWD => env('MPESA_CONSUMER_KEY').':'.env('MPESA_CONSUMER_SECRET'),
+            ]
         );
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
+        Log::info($response);
+
         return $response->access_token;
     }
+
     public function sendRequest($mpesa_url, $curl_post_data)
     {
         $ch = curl_init($mpesa_url);
         curl_setopt($ch, CURLOPT_URL, $mpesa_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $this->generateAccessToken(), 'Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer '.$this->generateAccessToken(), 'Content-Type: application/json']);
         $data_string = json_encode($curl_post_data, JSON_UNESCAPED_SLASHES);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -39,20 +42,23 @@ class DarajaApiController extends Controller
         // Log::info($data_string);
         $curl_response = curl_exec($ch);
         curl_close($ch);
+
         // Log::info($curl_response);
         return $curl_response;
     }
+
     public function registerUrl() //active
     {
-        $body = array(
+        $body = [
             'ShortCode' => env('MPESA_SHORTCODE'),
             'ResponseType' => 'Completed',
-            'ConfirmationURL' => url('') . '/api/c2b/confirmation',
-            'ValidationURL' => url('') . '/api/c2b/validation'
-        );
+            'ConfirmationURL' => url('').'/api/c2b/confirmation',
+            'ValidationURL' => url('').'/api/c2b/validation',
+        ];
         // Log::info($body);
         $mpesaUrl = env('MPESA_ENV') == 0 ? 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl' : 'https://api.safaricom.co.ke/mpesa/c2b/v2/registerurl';
         $response = json_decode($this->sendRequest($mpesaUrl, $body));
+
         return $response;
     }
 
@@ -60,6 +66,7 @@ class DarajaApiController extends Controller
     {
         $mpesaUrl = env('MPESA_ENV') == 0 ? 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest' : 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
         $response = json_decode($this->sendRequest($mpesaUrl, $data));
+
         return $response;
     }
 }
