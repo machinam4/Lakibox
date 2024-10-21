@@ -20,7 +20,7 @@ class DarajaApiController extends Controller
                 CURLOPT_HTTPHEADER => ['Content-Type:application/json; charset=utf8'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HEADER => false,
-                CURLOPT_USERPWD => env('MPESA_CONSUMER_KEY').':'.env('MPESA_CONSUMER_SECRET'),
+                CURLOPT_USERPWD => env('MPESA_CONSUMER_KEY').':'.env('MPESA_CONSUMER_SECRT'),
             ]
         );
         $response = json_decode(curl_exec($ch));
