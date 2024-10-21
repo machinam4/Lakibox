@@ -20,7 +20,7 @@ class BetsController extends Controller
             'PartyA' => $phoneNumber,
             'PartyB' => env('MPESA_SHORTCODE'),
             'PhoneNumber' => $phoneNumber,
-            'CallBackURL' => url('').env('MPESA_CALLBACK'),
+            'CallBackURL' => url('').'/api/c2b/express',
             'AccountReference' => "Box $box",
             'TransactionDesc' => 'Lucky Box '.$box,
         ];
