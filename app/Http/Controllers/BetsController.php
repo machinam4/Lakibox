@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deposits;
-use Illuminate\Http\Request;
 
 class BetsController extends Controller
 {
@@ -12,17 +11,17 @@ class BetsController extends Controller
         // stk push
         $timestamp = now()->format('YmdHis');
         $data = [
-            "BusinessShortCode" => env('MPESA_SHORTCODE'),
-            "Password" => base64_encode(env('MPESA_SHORTCODE') . env('MPESA_PASSKEY') . $timestamp),
-            "Timestamp" => $timestamp,
-            "TransactionType" => "CustomerPayBillOnline",
-            "Amount" => env('GAME_AMOUNT'),
-            "PartyA" => $phoneNumber,
-            "PartyB" => env('MPESA_SHORTCODE'),
-            "PhoneNumber" => $phoneNumber,
-            "CallBackURL" =>  url('') . env('MPESA_CALLBACK'),
-            "AccountReference" => "Box $box",
-            "TransactionDesc" => "Lucky Box " . $box
+            'BusinessShortCode' => env('MPESA_SHORTCODE'),
+            'Password' => base64_encode(env('MPESA_SHORTCODE').env('MPESA_PASSKEY').$timestamp),
+            'Timestamp' => $timestamp,
+            'TransactionType' => 'CustomerPayBillOnline',
+            'Amount' => env('GAME_AMOUNT'),
+            'PartyA' => $phoneNumber,
+            'PartyB' => env('MPESA_SHORTCODE'),
+            'PhoneNumber' => $phoneNumber,
+            'CallBackURL' => url('').env('MPESA_CALLBACK'),
+            'AccountReference' => "Box $box",
+            'TransactionDesc' => 'Lucky Box '.$box,
         ];
         // dd($data);
         // dd(response()->json($data, 200));
@@ -32,17 +31,17 @@ class BetsController extends Controller
         try {
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data);
-            // dd($response);
-            if ($response->ResponseCode !== "0") {
-                return response()->json("failed", 200);
+            LOG::info($response);
+            if ($response->ResponseCode !== '0') {
+                return response()->json('failed', 200);
             } else {
                 $res_data = [
                     // "ResultCode" => $response->ResultCode,
-                    "MerchantRequestID" => $response->MerchantRequestID,
-                    "CheckoutRequestID" => $response->CheckoutRequestID,
-                    "TransactionType" => "CustomerPayBillOnline",
-                    "BusinessShortCode" => env('MPESA_SHORTCODE'),
-                    "BillRefNumber" => "Box $box",
+                    'MerchantRequestID' => $response->MerchantRequestID,
+                    'CheckoutRequestID' => $response->CheckoutRequestID,
+                    'TransactionType' => 'CustomerPayBillOnline',
+                    'BusinessShortCode' => env('MPESA_SHORTCODE'),
+                    'BillRefNumber' => "Box $box",
                 ];
                 // dd($res_data);
                 Deposits::Create($res_data);
@@ -63,17 +62,17 @@ class BetsController extends Controller
             number_format(round(random_int(200000, 299999), -3)),
             number_format(round(random_int(300000, 399999), -3)),
             number_format(round(random_int(400000, 450000), -3)),
-            "SmartPhone",
-            "Motorbike",
+            'SmartPhone',
+            'Motorbike',
             // number_format(random_int(100, 1000)) . " Voucher",
-            "Smart TV",
-            "Water Dispenser",
-            "Standing Cooker",
-            number_format(0)
+            'Smart TV',
+            'Water Dispenser',
+            'Standing Cooker',
+            number_format(0),
         ];
         // send response
         switch ($box) {
-            case "Box 1":
+            case 'Box 1':
                 $values = [
                     'box1' => number_format(0),
                     'box2' => $prizes[array_rand($prizes)],
@@ -82,9 +81,10 @@ class BetsController extends Controller
                     'box5' => $prizes[array_rand($prizes)],
                     'box6' => $prizes[array_rand($prizes)],
                 ];
+
                 return $values;
                 break;
-            case "Box 2":
+            case 'Box 2':
                 $values = [
                     'box1' => $prizes[array_rand($prizes)],
                     'box2' => number_format(0),
@@ -93,9 +93,10 @@ class BetsController extends Controller
                     'box5' => $prizes[array_rand($prizes)],
                     'box6' => $prizes[array_rand($prizes)],
                 ];
+
                 return $values;
                 break;
-            case "Box 3":
+            case 'Box 3':
                 $values = [
                     'box1' => $prizes[array_rand($prizes)],
                     'box2' => $prizes[array_rand($prizes)],
@@ -104,9 +105,10 @@ class BetsController extends Controller
                     'box5' => $prizes[array_rand($prizes)],
                     'box6' => $prizes[array_rand($prizes)],
                 ];
+
                 return $values;
                 break;
-            case "Box 4":
+            case 'Box 4':
                 $values = [
                     'box1' => $prizes[array_rand($prizes)],
                     'box2' => $prizes[array_rand($prizes)],
@@ -115,9 +117,10 @@ class BetsController extends Controller
                     'box5' => $prizes[array_rand($prizes)],
                     'box6' => $prizes[array_rand($prizes)],
                 ];
+
                 return $values;
                 break;
-            case "Box 5":
+            case 'Box 5':
                 $values = [
                     'box1' => $prizes[array_rand($prizes)],
                     'box2' => $prizes[array_rand($prizes)],
@@ -126,9 +129,10 @@ class BetsController extends Controller
                     'box5' => number_format(0),
                     'box6' => $prizes[array_rand($prizes)],
                 ];
+
                 return $values;
                 break;
-            case "Box 6":
+            case 'Box 6':
                 $values = [
                     'box1' => $prizes[array_rand($prizes)],
                     'box2' => $prizes[array_rand($prizes)],
@@ -137,18 +141,20 @@ class BetsController extends Controller
                     'box5' => $prizes[array_rand($prizes)],
                     'box6' => number_format(0),
                 ];
+
                 return $values;
                 break;
 
             default:
                 $values = [
-                    'box1' => "!!ERROR!!",
-                    'box2' => "!!ERROR!!",
-                    'box3' => "!!ERROR!!",
-                    'box4' => "!!ERROR!!",
-                    'box5' => "!!ERROR!!",
-                    'box6' => "!!ERROR!!",
+                    'box1' => '!!ERROR!!',
+                    'box2' => '!!ERROR!!',
+                    'box3' => '!!ERROR!!',
+                    'box4' => '!!ERROR!!',
+                    'box5' => '!!ERROR!!',
+                    'box6' => '!!ERROR!!',
                 ];
+
                 return $values;
                 break;
         }
