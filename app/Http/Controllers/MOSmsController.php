@@ -39,12 +39,12 @@ class MOSmsController extends Controller
 
             $DEPOSIT = new BetsController;
             $funds = $DEPOSIT->depositfund($intValue, $phoneNumber);
-            // $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Tafadhali thibitisha malipo ya KES 30 ili kushiriki.';
+            $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 30 ili kushiriki.';
 
-            // return response()->json([
-            //     'result_message' => $sms,
-            //     'result_code' => 0,
-            // ]);
+            response()->json([
+                'result_message' => $sms,
+                'result_code' => 0,
+            ]);
         } else {
             // If the keyword "Box" is not found, provide a generic response
             // Log::info('Received SMS without keyword "Box": ' . $message);
@@ -60,12 +60,12 @@ class MOSmsController extends Controller
             ]);
         }
 
-        // return response()->json('its okay', 200);
-        $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Tafadhali thibitisha malipo ya KES 30 ili kushiriki.';
+        return response()->json('its okay', 200);
+        // $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Tafadhali thibitisha malipo ya KES 30 ili kushiriki.';
 
-        return response()->json([
-            'result_message' => $sms,
-            'result_code' => 0,
-        ]);
+        // return response()->json([
+        //     'result_message' => $sms,
+        //     'result_code' => 0,
+        // ]);
     }
 }

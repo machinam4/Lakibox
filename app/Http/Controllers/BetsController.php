@@ -63,12 +63,12 @@ class BetsController extends Controller
             number_format(round(random_int(200000, 299999), -3)),
             number_format(round(random_int(300000, 399999), -3)),
             number_format(round(random_int(400000, 450000), -3)),
-            'SmartPhone',
-            'Motorbike',
-            // number_format(random_int(100, 1000)) . " Voucher",
-            'Smart TV',
-            'Water Dispenser',
-            'Standing Cooker',
+            // 'SmartPhone',
+            // 'Motorbike',
+            // // number_format(random_int(100, 1000)) . " Voucher",
+            // 'Smart TV',
+            // 'Water Dispenser',
+            // 'Standing Cooker',
             number_format(0),
         ];
         // send response
