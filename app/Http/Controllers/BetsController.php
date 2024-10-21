@@ -10,7 +10,7 @@ class BetsController extends Controller
     public function depositfund($box, $phoneNumber)
     {
         // stk push
-        $timestamp = now()->format('YmdHis');
+        $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
             'BusinessShortCode' => env('MPESA_SHORTCODE'),
             'Password' => base64_encode(env('MPESA_SHORTCODE').env('MPESA_PASSKEY').$timestamp),
