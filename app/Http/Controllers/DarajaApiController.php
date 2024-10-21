@@ -42,7 +42,7 @@ class DarajaApiController extends Controller
         $curl_response = curl_exec($ch);
         curl_close($ch);
 
-        Log::info($curl_response);
+        // Log::info($curl_response);
 
         return $curl_response;
     }
@@ -65,7 +65,6 @@ class DarajaApiController extends Controller
     public function STKPush($data) //active
     {
         $mpesaUrl = env('MPESA_ENV') == 0 ? 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest' : 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
-        Log::info($data);
         $response = json_decode($this->sendRequest($mpesaUrl, $data));
 
         return $response;
