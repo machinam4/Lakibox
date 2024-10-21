@@ -22,8 +22,8 @@ class MOSmsController extends Controller
             // Respond to the SMS
             $sms = "Karibu LUCKYBOX!\n**\nPESA TASLIMU na MALI KEMKEM zimewekwa kwenye sanduku TANO.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI.Tuma chaguo lako kwa 24119 USHINDE sasa hivi!\nSTOP?*456*9*5#";
             // $SMS = new SMSController;
-            $SMS = new LidenController;
-            $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
+            // $SMS = new LidenController;
+            // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
             return response()->json([
                 'result_message' => $sms,
@@ -51,8 +51,8 @@ class MOSmsController extends Controller
             // Respond to the SMS
             $sms = "Umekosea!.\n**\nUlichagua $message.\n**\nCheza kwa kuchagua NUMBER (1-5).\n**\nMfano: 1\n**\nChagua TENA USHINDE!\n1:BOX 1\n2:BOX 2\n3:BOX 3\n4:BOX4\n5:BOX5\n**\**\nACC Bal: 0!\nSTOP*456*9*5#\n";
             // $SMS = new SMSController;
-            $SMS = new LidenController;
-            $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
+            // $SMS = new LidenController;
+            // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
             return response()->json([
                 'result_message' => $sms,
