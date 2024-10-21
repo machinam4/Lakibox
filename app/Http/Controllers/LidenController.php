@@ -42,7 +42,7 @@ class LidenController extends Controller
         $data = [
             'mobile' => $phone,
             'response_type' => 'json',
-            'sender_name' => 'BULK_TECHY',
+            'sender_name' => '24119',
             'service_id' => 0,
             'message' => $message,
         ];
