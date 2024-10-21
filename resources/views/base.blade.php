@@ -49,7 +49,7 @@
                     <div class="b-bg">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <span class="b-title">{{ env(APP_NAME) }}</span>
+                    <span class="b-title">{{ env(APP_KEY) }}</span>
                     {{-- <img src="{{ asset('assets/images/ridhishajamii-word-logo.svg') }}" alt=""
                         class="logo images">
                     <img src="{{ asset('assets/images/ridhishajamii-icon-logo.svg') }}" alt=""
