@@ -68,9 +68,11 @@ class LidenController extends Controller
         if (curl_errno($curl)) {
             // Log the error message
             echo 'Error:'.curl_error($curl);
+            Log::error('Error:'.curl_error($curl));
         }
 
         curl_close($curl);
+        Log::info($response);
 
         // Return the response
         return $response;
