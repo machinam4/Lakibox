@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deposits;
+use Illuminate\Support\Facades\Log;
 
 class BetsController extends Controller
 {
@@ -31,7 +32,7 @@ class BetsController extends Controller
         try {
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data);
-            LOG::info($response);
+            Log::info($response);
             if ($response->ResponseCode !== '0') {
                 return response()->json('failed', 200);
             } else {
