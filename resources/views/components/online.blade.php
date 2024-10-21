@@ -36,7 +36,7 @@
                                 @foreach ($players as $player)
                                     <tr>
                                         <th>{{ $player->TransTime }}</th>
-                                        <th>{{ $player->player->FirstName }}</th>
+                                        <th>{{ optional($player->player)->FirstName }}</th>
                                         <th>{{ $player->MSISDN }}</th>
                                         <th>{{ $player->BillRefNumber }}</th>
                                         <th>{{ $player->TransAmount }}</th>
