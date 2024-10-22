@@ -189,7 +189,7 @@ class BetsController extends Controller
         }
 
         // Step 1: Determine if the player wins
-        $isWin = mt_rand(1, 100) <= 7; // 10% chance to win
+        $isWin = mt_rand(1, 100) <= 5; // 10% chance to win
 
         if ($isWin) {
             // Generate the win amount and place it in the selected box
