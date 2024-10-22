@@ -163,7 +163,7 @@ class BetsController extends Controller
     //     // return response()->json(['login' => 'accepted'], 200);
     // }
 
-    public function placeBet(string $box, int $betAmount)
+    public function placeBet(string $box)
     {
         $prizes = [
             number_format(round(random_int(50000, 100000), -4)),

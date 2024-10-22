@@ -9,6 +9,8 @@ class B2CRequest extends Model
 {
     use HasFactory;
 
+    protected $table = 'b2c_requests';
+
     protected $fillable = [
         'originator_conversation_id',
         'conversation_id',

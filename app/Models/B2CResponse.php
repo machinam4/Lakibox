@@ -9,6 +9,8 @@ class B2CResponse extends Model
 {
     use HasFactory;
 
+    protected $table = 'b2c_responses';
+
     protected $fillable = [
         'originator_conversation_id',
         'conversation_id',
