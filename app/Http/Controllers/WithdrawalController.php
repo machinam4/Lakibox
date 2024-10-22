@@ -65,7 +65,7 @@ class WithdrawalController extends Controller
             'ResultURL' => 'https://lakibox.ridhishajamii.com/api/b2c/result',
             // 'QueueTimeOutURL' => url('').'/api/b2c/queue',
             // 'ResultURL' => url('').'/api/b2c/result',
-            'Occasion' => '',
+            'Occasion' => 'Winner Box',
         ];
 
         try {

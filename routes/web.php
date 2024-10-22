@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->controller(DashboardController::class)->group(function () {
     Route::get('/', 'dashboard')->name('dashboard');
     Route::get('/players', 'players')->name('players');
+    Route::get('/winners', 'winners')->name('winners');
     Route::get('/online/{index}', 'online')->name('online');
 });
 Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);

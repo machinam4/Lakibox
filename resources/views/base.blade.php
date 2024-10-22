@@ -70,7 +70,10 @@
                         <a href="{{ Route('players') }}" class="nav-link"><span class="pcoded-micon"><i
                                     class="feather icon-home"></i></span><span class="pcoded-mtext">Players</span></a>
                     </li>
-
+                    <li data-username="winners lakibox evoton emartmobile" class="nav-item">
+                        <a href="{{ Route('winners') }}" class="nav-link"><span class="pcoded-micon"><i
+                                    class="feather icon-home"></i></span><span class="pcoded-mtext">Winners</span></a>
+                    </li>
                     </li>
                     <li class="nav-item pcoded-menu-caption">
                         <label>Support</label>
