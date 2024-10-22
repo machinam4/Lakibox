@@ -47,7 +47,7 @@ class WithdrawalController extends Controller
         return $curl_response;
     }
 
-    public function b2cPaymentRequest()
+    public function b2cPaymentRequest($phone, $amount)
     {
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
@@ -57,9 +57,9 @@ class WithdrawalController extends Controller
             'InitiatorName' => 'EMART API',
             'SecurityCredential' => env('B2C_SECURITY_CREDENTIAL'),
             'CommandID' => 'PromotionPayment',
-            'Amount' => 10,
+            'Amount' => $amount,
             'PartyA' => env('B2C_SHORTCODE'),
-            'PartyB' => 254758309015,
+            'PartyB' => $phone,
             'Remarks' => 'winner box 2',
             'QueueTimeOutURL' => 'https://lakibox.ridhishajamii.com/api/b2c/queue',
             'ResultURL' => 'https://lakibox.ridhishajamii.com/api/b2c/result',
