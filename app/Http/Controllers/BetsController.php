@@ -33,6 +33,9 @@ class BetsController extends Controller
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data);
             // Log::info(json_encode($response));
+            if (! isset($response->ResponseCode)) {
+                return response()->json('failed', 200);
+            }
             if ($response->ResponseCode !== '0') {
                 return response()->json('failed', 200);
             } else {
