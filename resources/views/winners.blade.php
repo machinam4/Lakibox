@@ -1,5 +1,5 @@
 @extends('base')
-@section('page-title', 'Dashboard')
+@section('page-title', 'Winners')
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('assets/plugins/data-tables/css/datatables.min.css') }}">
 @endsection

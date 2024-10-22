@@ -72,16 +72,16 @@ class WithdrawalController extends Controller
             $response = json_decode($this->sendRequest($mpesaUrl, $data));
 
             if (isset($response->errorCode)) {
-                Log::info(json_encode($response));
+                // Log::info(json_encode($response));
 
                 return response()->json('failed', 200);
             }
             if ($response->ResponseCode !== '0') {
-                Log::info(json_encode($response));
+                // Log::info(json_encode($response));
 
                 return response()->json('failed', 200);
             } else {
-                Log::info(json_encode($response));
+                // Log::info(json_encode($response));
 
                 // Parse the response and store it in the database
                 $responseData = $response;
@@ -109,7 +109,7 @@ class WithdrawalController extends Controller
 
     public function handleResult(Request $request)
     {
-        Log::info('B2C Result Callback:', $request->all());
+        // Log::info('B2C Result Callback:', $request->all());
 
         $data = $request->all();
 
