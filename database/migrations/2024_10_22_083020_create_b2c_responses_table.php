@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('result_code')->nullable();
             $table->decimal('transaction_amount', 10, 2)->nullable();
             $table->string('transaction_receipt')->nullable();
-            $table->boolean('b2c_recipient_is_registered_customer')->nullable();
+            $table->string('b2c_recipient_is_registered_customer')->nullable();
             $table->decimal('b2c_charges_paid_account_available_funds', 15, 2)->nullable();
             $table->string('receiver_party_public_name')->nullable();
-            $table->timestamp('transaction_completed_datetime')->nullable();
+            $table->string('transaction_completed_datetime')->nullable();
             $table->decimal('b2c_utility_account_available_funds', 15, 2)->nullable();
             $table->decimal('b2c_working_account_available_funds', 15, 2)->nullable();
             $table->timestamps();
