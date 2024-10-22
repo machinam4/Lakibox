@@ -78,6 +78,8 @@ class MPESAResponseController extends Controller
                 $WINS = new WithdrawalController;
                 $sendWinnings = $WINS->b2cPaymentRequest($bet->MSISDN, $bet_result->amount_won);
 
+                Log::info('wins');
+
                 // send results
                 $SMS = new LidenController;
                 $smssend = $SMS->sendSMS($sms, $bet->MSISDN);
