@@ -31,6 +31,10 @@ class MOSmsController extends Controller
             ]);
         } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
+            $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 30 ili kushiriki.';
+            $SMS = new LidenController;
+            $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
+
             // Extract and convert the integer part
             if (preg_match("/(\d+)/", $matches[0], $intMatches)) {
                 $intValue = (int) $intMatches[0];
@@ -39,10 +43,6 @@ class MOSmsController extends Controller
 
             $DEPOSIT = new BetsController;
             $funds = $DEPOSIT->depositfund($intValue, $phoneNumber);
-            $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 30 ili kushiriki.';
-
-            $SMS = new LidenController;
-            $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
         } else {
             // If the keyword "Box" is not found, provide a generic response
