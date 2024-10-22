@@ -118,15 +118,15 @@ class WithdrawalController extends Controller
 
             if ($result['ResultCode'] !== 0) {
                 B2CResponse::create([
-                    'originator_conversation_id' => $Result['OriginatorConversationID'],
-                    'conversation_id' => $Result['ConversationID'],
-                    'transaction_id' => $Result['TransactionID'],
-                    'result_code' => $Result['ResultCode'],
-                    'result_desc' => $Result['ResultDesc'],
+                    'originator_conversation_id' => $result['OriginatorConversationID'],
+                    'conversation_id' => $result['ConversationID'],
+                    'transaction_id' => $result['TransactionID'],
+                    'result_code' => $result['ResultCode'],
+                    'result_desc' => $result['ResultDesc'],
                 ]);
 
                 $SMS = new LidenController;
-                $AdminNotif = $SMS->sendSMS($Result['ResultDesc'], 254758309015);
+                $AdminNotif = $SMS->sendSMS($result['ResultDesc'], 254758309015);
 
                 return [
                     'ResultCode' => 'failed',
