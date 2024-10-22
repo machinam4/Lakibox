@@ -11,8 +11,20 @@
             <div class="col-md-3">
                 <div class="card bg-c-blue order-card">
                     <div class="card-body">
-                        <h6 class="m-b-20">Total Today</h6>
-                        <h2 class="text-left"><span id="totalAmount">{{ $totalToday }}</span></h2>
+                        <div>
+                            <h6 class="m-b-20">Pay Ins</h6>
+                            <h2 class="text-left"><span id="totalAmount">{{ $totalToday }}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-body">
+                        <div>
+                            <h6 class="m-b-20">Today Winnings</h6>
+                            <h2 class="text-left"><span id="totalAmount">{{ $totalWinnings }}</span></h2>
+                        </div>
                     </div>
                 </div>
             </div>

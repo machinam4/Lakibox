@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $totalToday = Deposits::whereDate('TransTime', date('Y-m-d'))->sum('TransAmount');
         $totalWinnings = B2CResponse::whereDate('created_at', date('Y-m-d'))->sum('transaction_amount');
 
-        return view('dashboard', ['dailyTotals' => $dailyTotals, 'totalToday' => $totalToday]);
+        return view('dashboard', ['dailyTotals' => $dailyTotals, 'totalToday' => $totalToday, 'totalWinnings' => $totalWinnings]);
     }
 
     public function players()
