@@ -30,4 +30,4 @@ Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
 // Route::get('/send-message', [LidenController::class, 'sendSMS']);
 
 //b2c test routes
-Route::get('/mpesa/b2c', [WithdrawalController::class, 'b2cPaymentRequest']);
+Route::get('/mpesa/b2c/{phone}/{amount}', [WithdrawalController::class, 'b2cPaymentRequest']);
