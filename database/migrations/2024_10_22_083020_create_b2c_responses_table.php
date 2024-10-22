@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('originator_conversation_id')->nullable();
             $table->string('conversation_id')->nullable();
             $table->integer('result_code')->nullable();
+            $table->string('result_desc')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->decimal('transaction_amount', 10, 2)->nullable();
             $table->string('transaction_receipt')->nullable();
             $table->string('b2c_recipient_is_registered_customer')->nullable();

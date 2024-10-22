@@ -15,6 +15,8 @@ class B2CResponse extends Model
         'originator_conversation_id',
         'conversation_id',
         'result_code',
+        'result_desc',
+        'transaction_id',
         'transaction_amount',
         'transaction_receipt',
         'b2c_recipient_is_registered_customer',
