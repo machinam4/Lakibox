@@ -216,6 +216,6 @@ class BetsController extends Controller
     private function generateWinAmount()
     {
         // 80% chance the win amount is below 500, 20% chance between 500 and 999
-        return mt_rand(1, 100) <= 80 ? mt_rand(30, 200) : mt_rand(201, 499);
+        return mt_rand(1, 100) <= 80 ? mt_rand(30, 100) : mt_rand(101, 299);
     }
 }
