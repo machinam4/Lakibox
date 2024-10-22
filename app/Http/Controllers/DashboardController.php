@@ -26,7 +26,9 @@ class DashboardController extends Controller
         $last_index = Deposits::latest()->first();
         $players = Deposits::whereDate('TransTime', date('Y-m-d'))->where('ResultCode', 0)->with('player')->orderBy('TransTime', 'DESC')->limit(20)->get();
 
-        return view('players', ['last_index' => $last_index->id, 'players' => $players]);
+        $totalWinnings = B2CResponse::whereDate('created_at', date('Y-m-d'))->sum('transaction_amount');
+
+        return view('players', ['last_index' => $last_index->id, 'players' => $players, 'totalWinnings' => $totalWinnings]);
     }
 
     public function online($index)

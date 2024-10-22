@@ -8,8 +8,8 @@
                     <div class="card-body">
                         <h6 class="m-b-20">Total Today</h6>
                         <h2 class="text-left"><span id="totalAmount">Loading...</span></h2>
-                        <p class="m-b-0 text-right">Shortcode:
-                            {{ env('SMS_SHORTCODE') }}</p>
+                        <p class="m-b-0 text-right">Winnings:
+                            {{ $totalWinnings }}</p>
                     </div>
                 </div>
             </div>
