@@ -43,6 +43,7 @@ class BetsController extends Controller
                     'TransactionType' => 'CustomerPayBillOnline',
                     'BusinessShortCode' => env('MPESA_SHORTCODE'),
                     'BillRefNumber' => "Box $box",
+                    'MSISDN' => $phoneNumber,
                 ];
                 // dd($res_data);
                 Deposits::Create($res_data);
