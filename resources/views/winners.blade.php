@@ -64,7 +64,7 @@
         $(document).ready(function() {
             var t = $('#add-row-table').DataTable({
                 order: [
-                    [2, 'desc']
+                    [0, 'desc']
                 ],
             });
         })

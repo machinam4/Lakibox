@@ -47,7 +47,7 @@ class BetsController extends Controller
                 ];
                 // dd($res_data);
                 Deposits::Create($res_data);
-                Log::info('stk sent');
+                // Log::info('stk sent');
             }
 
             // session()->flush();

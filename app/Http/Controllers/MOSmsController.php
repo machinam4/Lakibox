@@ -12,7 +12,7 @@ class MOSmsController extends Controller
         $data = $request->all();
         $message = $data['message'];
         $phoneNumber = $data['mobile'];
-        Log::info($message);
+        // Log::info($message);
         // Check if the message contains the keyword "Box"
         $box = strtolower($message); // Convert to lowercase if needed
         if ($box == 'box') {
