@@ -3,6 +3,7 @@
 use App\Http\Controllers\DarajaApiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LidenController;
+use App\Http\Controllers\WithdrawalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,6 @@ Route::middleware(['auth'])->controller(DashboardController::class)->group(funct
 Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
 
 // Route::get('/send-message', [LidenController::class, 'sendSMS']);
+
+//b2c test routes
+Route::get('/mpesa/b2c', [WithdrawalController::class, 'b2cPaymentRequest']);
