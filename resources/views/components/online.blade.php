@@ -41,7 +41,7 @@
                                         <th>{{ $player->BillRefNumber }}</th>
                                         <th>{{ $player->TransAmount }}</th>
                                         <th>{{ $player->TransID }}</th>
-                                        <th>{{ $player->BusinessShortCode }}</th>
+                                        <th>{{ $player->SmsShortcode }}</th>
                                         {{-- <th>Account</th> --}}
                                     </tr>
                                 @endforeach

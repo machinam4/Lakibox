@@ -8,23 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Deposits extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        "ResultCode",
-        "MerchantRequestID",
-        "CheckoutRequestID",
-        "TransactionType",
-        "TransID",
-        "TransTime",
-        "TransAmount",
-        "BusinessShortCode",
-        "BillRefNumber",
-        "InvoiceNumber",
-        "OrgAccountBalance",
-        "ThirdPartyTransID",
-        "MSISDN",
-        "FirstName",
-        "MiddleName",
-        "LastName",
+        'ResultCode',
+        'MerchantRequestID',
+        'CheckoutRequestID',
+        'TransactionType',
+        'TransID',
+        'TransTime',
+        'TransAmount',
+        'BusinessShortCode',
+        'BillRefNumber',
+        'InvoiceNumber',
+        'OrgAccountBalance',
+        'ThirdPartyTransID',
+        'MSISDN',
+        'FirstName',
+        'MiddleName',
+        'LastName',
+        'SmsShortcode',
     ];
 
     public function player()

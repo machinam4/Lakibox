@@ -12,6 +12,7 @@ class MOSmsController extends Controller
         $data = $request->all();
         $message = $data['message'];
         $phoneNumber = $data['mobile'];
+        $sms_shortcode = $data['shortcode'];
         // Log::info($message);
         // Check if the message contains the keyword "Box"
         $box = strtolower($message); // Convert to lowercase if needed
@@ -42,7 +43,7 @@ class MOSmsController extends Controller
             //    echo $intValue; // Output: "3"
 
             $DEPOSIT = new BetsController;
-            $funds = $DEPOSIT->depositfund($intValue, $phoneNumber);
+            $funds = $DEPOSIT->depositfund($intValue, $phoneNumber, $sms_shortcode);
 
         } else {
             // If the keyword "Box" is not found, provide a generic response

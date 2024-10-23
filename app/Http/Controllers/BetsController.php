@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class BetsController extends Controller
 {
-    public function depositfund($box, $phoneNumber)
+    public function depositfund($box, $phoneNumber, $sms_shortcode)
     {
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
@@ -47,6 +47,7 @@ class BetsController extends Controller
                     'BusinessShortCode' => env('MPESA_SHORTCODE'),
                     'BillRefNumber' => "Box $box",
                     'MSISDN' => $phoneNumber,
+                    'SmsShortcode' => $sms_shortcode,
                 ];
                 // dd($res_data);
                 Deposits::Create($res_data);

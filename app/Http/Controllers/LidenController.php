@@ -35,7 +35,7 @@ class LidenController extends Controller
     }
 
     // bulk.ke sms sending
-    public function sendSMS($message, $phone)
+    public function sendSMS($message, $phone, $shortcode)
     {
         $curl = curl_init();
 
@@ -43,7 +43,7 @@ class LidenController extends Controller
         $data = [
             'mobile' => $phone,
             'response_type' => 'json',
-            'sender_name' => '24119',
+            'sender_name' => $shortcode,
             'service_id' => 0,
             'message' => $message,
         ];

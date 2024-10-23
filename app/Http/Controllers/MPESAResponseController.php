@@ -82,12 +82,12 @@ class MPESAResponseController extends Controller
 
                 // send results
                 $SMS = new LidenController;
-                $smssend = $SMS->sendSMS($sms, $bet->MSISDN);
+                $smssend = $SMS->sendSMS($sms, $bet->MSISDN, $bet->SmsShortcode);
             } else {
                 // Log::info('lost');
                 $sms = "Umepoteza!\n**\nUlichagua $bet->BillRefNumber\n**\nBox 1- ".$bet_result['values']['box1']."\nBox 2- ".$bet_result['values']['box2']."\nBox 3- ".$bet_result['values']['box3']."\nBox 4- ".$bet_result['values']['box4']."\nBox 5- ".$bet_result['values']['box5']."\n**\n**\nChagua tena USHINDE.\nSTOP?*456*9*5#";
                 $SMS = new LidenController;
-                $smssend = $SMS->sendSMS($sms, $bet->MSISDN);
+                $smssend = $SMS->sendSMS($sms, $bet->MSISDN, $bet->SmsShortcode);
             }
 
         } catch (\Throwable $th) {
