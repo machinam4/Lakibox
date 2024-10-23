@@ -52,7 +52,7 @@ class WithdrawalController extends Controller
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
         $ConversationID = $timestamp.'-'.$smsshortcode;
-        Log::info($ConversationID);
+        // Log::info($ConversationID);
         // Payload data to send with the request
         $data = [
             'OriginatorConversationID' => $ConversationID,
@@ -102,7 +102,7 @@ class WithdrawalController extends Controller
                 }
             }
 
-            Log::info(explode('-', $responseData->OriginatorConversationID)[1]);
+            // Log::info(explode('-', $responseData->OriginatorConversationID)[1]);
 
             // Return the response
             return response()->json($responseData);
@@ -144,7 +144,7 @@ class WithdrawalController extends Controller
             $parameters = collect($result['ResultParameters']['ResultParameter'])
                 ->pluck('Value', 'Key');
 
-            Log::info(explode('-', $result['OriginatorConversationID'])[1]);
+            // Log::info(explode('-', $result['OriginatorConversationID'])[1]);
             // Store the relevant data in the database
             B2CResponse::create([
                 'originator_conversation_id' => explode('-', $result['OriginatorConversationID'])[0] ?? null,
