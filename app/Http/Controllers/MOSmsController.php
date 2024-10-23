@@ -21,7 +21,7 @@ class MOSmsController extends Controller
             // You can customize this part to perform any specific actions you need.
             // Log::info('Received SMS without keyword "Box": ' . $message);
             // Respond to the SMS
-            $sms = "Karibu LUCKYBOX!\n**\nPESA TASLIMU na MALI KEMKEM zimewekwa kwenye sanduku TANO.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI.Tuma chaguo lako kwa 24119 USHINDE sasa hivi!\nSTOP?*456*9*5#";
+            $sms = "Karibu LUCKYBOX!\n**\nPESA TASLIMU na MALI KEMKEM zimewekwa kwenye sanduku TANO.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI.Tuma chaguo lako kwa".$sms_shortcode."USHINDE sasa hivi!\nSTOP?*456*9*5#";
             // $SMS = new SMSController;
             // $SMS = new LidenController;
             // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
