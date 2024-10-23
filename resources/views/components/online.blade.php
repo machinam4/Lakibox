@@ -28,7 +28,7 @@
                                     <th>BOX CHOICE</th>
                                     <th>Amount</th>
                                     <th>TransCode</th>
-                                    <th>Paybill Number</th>
+                                    <th>SMS SHORTCODE</th>
                                     {{-- <th>Account</th> --}}
                                 </tr>
                             </thead>
