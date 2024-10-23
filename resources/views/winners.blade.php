@@ -29,6 +29,7 @@
                                     <th>TransactionID</th>
                                     <th>Names</th>
                                     <th>Amount</th>
+                                    <th>SMS SHORTCODE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,6 +39,7 @@
                                         <th>{{ $winner->transaction_id }}</th>
                                         <th>{{ $winner->receiver_party_public_name }}</th>
                                         <th>{{ $winner->transaction_amount }}</th>
+                                        <th>{{ $winner->SmsShortcode }}</th>
                                     </tr>
                                 @endforeach
                             <tfoot>
@@ -45,6 +47,7 @@
                                 <th>TransactionID</th>
                                 <th>Names</th>
                                 <th>Amount</th>
+                                <th>SMS SHORTCODE</th>
                             </tfoot>
                             </tbody>
                         </table>

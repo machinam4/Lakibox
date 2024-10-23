@@ -25,6 +25,8 @@ Route::middleware(['auth'])->controller(DashboardController::class)->group(funct
     Route::get('/players', 'players')->name('players');
     Route::get('/winners', 'winners')->name('winners');
     Route::get('/online/{index}', 'online')->name('online');
+    Route::get('/radios', 'radios')->name('radios');
+    Route::post('/radios/create', 'create_radio')->name('create_radio');
 });
 Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
 

@@ -74,6 +74,13 @@
                         <a href="{{ Route('winners') }}" class="nav-link"><span class="pcoded-micon"><i
                                     class="feather icon-home"></i></span><span class="pcoded-mtext">Winners</span></a>
                     </li>
+                    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Developer')
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('radios') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span
+                                    class="pcoded-mtext">Radios</span></a>
+                        </li>
+                    @endif
                     </li>
                     <li class="nav-item pcoded-menu-caption">
                         <label>Support</label>
