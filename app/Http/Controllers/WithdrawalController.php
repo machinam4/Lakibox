@@ -47,13 +47,14 @@ class WithdrawalController extends Controller
         return $curl_response;
     }
 
-    public function b2cPaymentRequest($phone, $amount)
+    public function b2cPaymentRequest($phone, $amount, $smsshortcode = 'none')
     {
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
+        $ConversationID = $timestamp.'-'.$smsshortcode;
         // Payload data to send with the request
         $data = [
-            'OriginatorConversationID' => $timestamp,
+            'OriginatorConversationID' => $ConversationID,
             'InitiatorName' => 'EMART API',
             'SecurityCredential' => env('B2C_SECURITY_CREDENTIAL'),
             'CommandID' => 'PromotionPayment',
@@ -89,12 +90,13 @@ class WithdrawalController extends Controller
                 if (isset($responseData->OriginatorConversationID)) {
                     B2CRequest::create([
                         'originator_conversation_id' => $responseData->OriginatorConversationID,
-                        'conversation_id' => $responseData->ConversationID ?? null,
+                        'conversation_id' => explode('-', $responseData->ConversationID)[0] ?? null,
                         'response_code' => $responseData->ResponseCode ?? null,
                         'response_description' => $responseData->ResponseDescription ?? null,
                         'recipient_phone' => $data['PartyB'], // Phone number from the request
                         'amount' => $data['Amount'],         // Amount from the request
                         'transaction_timestamp' => now(),    // Save current timestamp
+                        'SmsShortcode' => explode('-', $responseData->ConversationID)[1] ?? null,
                     ]);
                 }
             }
@@ -119,10 +121,11 @@ class WithdrawalController extends Controller
             if ($result['ResultCode'] !== 0) {
                 B2CResponse::create([
                     'originator_conversation_id' => $result['OriginatorConversationID'],
-                    'conversation_id' => $result['ConversationID'],
+                    'conversation_id' => explode('-', $result['ConversationID'])[0],
                     'transaction_id' => $result['TransactionID'],
                     'result_code' => $result['ResultCode'],
                     'result_desc' => $result['ResultDesc'],
+                    'SmsShortcode' => explode('-', $result['ConversationID'])[1],
                 ]);
 
                 $SMS = new LidenController;
@@ -141,7 +144,8 @@ class WithdrawalController extends Controller
             // Store the relevant data in the database
             B2CResponse::create([
                 'originator_conversation_id' => $result['OriginatorConversationID'] ?? null,
-                'conversation_id' => $result['ConversationID'] ?? null,
+                'conversation_id' => explode('-', $result['ConversationID'])[0] ?? null,
+                'SmsShortcode' => explode('-', $result['ConversationID'])[1],
                 'result_code' => $result['ResultCode'] ?? null,
                 'result_desc' => $result['ResultDesc'],
                 'transaction_id' => $result['TransactionID'],
@@ -153,6 +157,7 @@ class WithdrawalController extends Controller
                 'transaction_completed_datetime' => $parameters->get('TransactionCompletedDateTime'),
                 'b2c_utility_account_available_funds' => $parameters->get('B2CUtilityAccountAvailableFunds'),
                 'b2c_working_account_available_funds' => $parameters->get('B2CWorkingAccountAvailableFunds'),
+
             ]);
 
             return response()->json(['message' => 'B2C result processed successfully'], 200);
