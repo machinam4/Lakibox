@@ -83,7 +83,7 @@
                                 player.BillRefNumber,
                                 player.TransAmount,
                                 player.TransID,
-                                player.BusinessShortCode,
+                                player.SmsShortcode,
                                 // data
                             ]).draw(false);
                             index = player.id;
