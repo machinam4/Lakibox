@@ -25,5 +25,6 @@ class B2CResponse extends Model
         'transaction_completed_datetime',
         'b2c_utility_account_available_funds',
         'b2c_working_account_available_funds',
+        'SmsShortcode',
     ];
 }

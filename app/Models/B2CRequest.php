@@ -19,5 +19,6 @@ class B2CRequest extends Model
         'recipient_phone',
         'amount',
         'transaction_timestamp',
+        'SmsShortcode',
     ];
 }
