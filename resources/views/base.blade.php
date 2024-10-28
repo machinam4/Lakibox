@@ -104,7 +104,7 @@
                     <i class="fas fa-bolt"></i>
                 </div>
                 <span class="b-title">Dasho</span> -->
-                <img src="{{ asset('assets/images/ridhishajamii-word-logo.svg') }}" alt="" class="logo images">
+                <img src="{{ asset('assets/images/ridhishajamii-wor-logo.svg') }}" alt="LAKI BOX" class="logo images">
                 <img src="{{ asset('assets/images/ridhishajamii-icon-logo.svg') }}" alt=""
                     class="logo-thumb images">
             </a>
