@@ -58,11 +58,13 @@ class DashboardController extends Controller
             $data = [
                 'new_players' => Deposits::where('id', '>', $index)->where('ResultCode', 0)->with('player')->get(),
                 'totalAmount' => Deposits::whereDate('TransTime', date('Y-m-d'))->sum('TransAmount'),
+                'totalWinnings' => B2CResponse::whereDate('TransTime', date('Y-m-d'))->sum('TransAmount'),
             ];
         } else {
             $data = [
                 'new_players' => Deposits::where('id', '>', $index)->where('ResultCode', 0)->where('SmsShortcode', Auth::user()->role)->with('player')->get(),
                 'totalAmount' => Deposits::whereDate('TransTime', date('Y-m-d'))->where('SmsShortcode', Auth::user()->role)->sum('TransAmount'),
+                'totalWinnings' => B2CResponse::whereDate('TransTime', date('Y-m-d'))->where('SmsShortcode', Auth::user()->role)->sum('TransAmount'),
             ];
         }
 

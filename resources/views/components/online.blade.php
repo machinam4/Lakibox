@@ -16,8 +16,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card statustic-card">
-                        <div class="card-header borderless pb-0">
-                            <h5>Total Paid In</h5>
+                        <div class="card-header bg-c-blue border-0">
+                            <h5 class="text-white m-b-0">Total Paid In</h5>
                         </div>
                         <div class="card-body text-center">
                             <span class="d-block text-c-blue f-36" id="totalAmount">Loading...</span>
@@ -26,27 +26,35 @@
                                 <div class="progress-bar bg-c-blue" style="width:56%"></div>
                             </div>
                         </div>
-                        {{-- <div class="card-footer bg-c-blue border-0">
-                            <h6 class="text-white m-b-0">Stakes: 22</h6>
-                        </div> --}}
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="card statustic-card">
-                        <div class="card-header borderless pb-0">
-                            <h5>Winnings</h5>
+                        <div class="card-header bg-c-purple border-0">
+                            <h5 class="text-white m-b-0">Winnings</h5>
                         </div>
                         <div class="card-body text-center">
-                            <span class="d-block text-c-green f-36">{{ $totalWinnings }}</span>
+                            <span class="d-block text-c-purple f-36" id="totalWinnings">{{ $totalWinnings }}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
-                                <div class="progress-bar bg-c-green" style="width:85%"></div>
+                                <div class="progress-bar bg-c-purple" style="width:85%"></div>
                             </div>
                         </div>
-                        {{-- <div class="card-footer bg-c-green border-0">
-                            <h6 class="text-white m-b-0">Winners: 85</h6>
-                        </div> --}}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card statustic-card">
+                        <div class="card-header bg-c-green border-0">
+                            <h5 class="text-white m-b-0">Yield</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="d-block text-c-green f-36" id="totalYield">Loading...</span>
+                            <p class="m-b-0">Total</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-c-green" style="width:42%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,6 +162,8 @@
                     // [ Add Rows ]
                     $.get('online/' + index, function(data) {
                         $("#totalAmount").html(data.totalAmount)
+                        $("#totalWinnings").html(data.totalWinnings)
+                        $("#totalYield").html(data.totalAmount - data.totalWinnings)
                         console.log(data);
                         data.new_players.forEach(player => {
                             t.row.add([
