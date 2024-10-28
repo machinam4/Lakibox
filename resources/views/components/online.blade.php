@@ -162,13 +162,10 @@
                 if (index > 1) {
                     // [ Add Rows ]
                     $.get('online/' + index, function(data) {
+                        $("#totalAmount").html(data.totalAmount.toLocaleString());
+                        $("#totalWinnings").html(data.totalWinnings.toLocaleString());
 
-                        let totalAmount = data.totalAmount;
-                        let totalWinnings = data.totalWinnings;
                         let totalYield = data.totalAmount - data.totalWinnings;
-
-                        $("#totalAmount").html(totalAmount.toLocaleString());
-                        $("#totalWinnings").html(totalWinnings.toLocaleString());
                         $("#totalYield").html(totalYield.toLocaleString());
                         // console.log(data);
                         data.new_players.forEach(player => {
