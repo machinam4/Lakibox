@@ -47,7 +47,7 @@
                             <h5 class="text-white m-b-0">Total Paid In</h5>
                         </div>
                         <div class="card-body text-center">
-                            <span class="d-block text-c-blue f-36">{{ $totalToday }}</span>
+                            <span class="d-block text-c-blue f-36">{{ number_format($totalToday) }}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
                                 <div class="progress-bar bg-c-blue" style="width:56%"></div>
@@ -62,7 +62,7 @@
                             <h5 class="text-white m-b-0">Winnings</h5>
                         </div>
                         <div class="card-body text-center">
-                            <span class="d-block text-c-purple f-36">{{ $totalWinnings }}</span>
+                            <span class="d-block text-c-purple f-36">{{ number_format($totalWinnings) }}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
                                 <div class="progress-bar bg-c-purple" style="width:85%"></div>
@@ -76,7 +76,7 @@
                             <h5 class="text-white m-b-0">Yield</h5>
                         </div>
                         <div class="card-body text-center">
-                            <span class="d-block text-c-green f-36">{{ $totalToday - $totalWinnings }}</span>
+                            <span class="d-block text-c-green f-36">{{ number_format($totalToday - $totalWinnings) }}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
                                 <div class="progress-bar bg-c-green" style="width:42%"></div>

@@ -35,7 +35,8 @@
                             <h5 class="text-white m-b-0">Winnings</h5>
                         </div>
                         <div class="card-body text-center">
-                            <span class="d-block text-c-purple f-36" id="totalWinnings">{{ $totalWinnings }}</span>
+                            <span class="d-block text-c-purple f-36"
+                                id="totalWinnings">{{ number_format($totalWinnings) }}</span>
                             <p class="m-b-0">Total</p>
                             <div class="progress">
                                 <div class="progress-bar bg-c-purple" style="width:85%"></div>
@@ -161,8 +162,8 @@
                 if (index > 1) {
                     // [ Add Rows ]
                     $.get('online/' + index, function(data) {
-                        $("#totalAmount").html(data.totalAmount)
-                        $("#totalWinnings").html(data.totalWinnings)
+                        $("#totalAmount").html(data.totalAmount.toLocaleString())
+                        $("#totalWinnings").html(data.totalWinnings.toLocaleString())
                         $("#totalYield").html(data.totalAmount - data.totalWinnings)
                         console.log(data);
                         data.new_players.forEach(player => {
