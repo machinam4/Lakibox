@@ -26,9 +26,9 @@
                                 <div class="progress-bar bg-c-blue" style="width:56%"></div>
                             </div>
                         </div>
-                        <div class="card-footer bg-c-blue border-0">
+                        {{-- <div class="card-footer bg-c-blue border-0">
                             <h6 class="text-white m-b-0">Stakes: 22</h6>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -44,9 +44,9 @@
                                 <div class="progress-bar bg-c-green" style="width:85%"></div>
                             </div>
                         </div>
-                        <div class="card-footer bg-c-green border-0">
+                        {{-- <div class="card-footer bg-c-green border-0">
                             <h6 class="text-white m-b-0">Winners: 85</h6>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -5,6 +5,9 @@
     <!-- [ Main Content ] start -->
     <div class="row">
         <!-- Project statustic start -->
+        <a href="{{ Route('players') }}" class="btn btn-primary block mb-5">
+            BACK
+        </a>
         <div class="col-xl-12">
             <div class="row">
                 <div class="col-md-4">
@@ -19,9 +22,9 @@
                                 <div class="progress-bar bg-c-blue" style="width:56%"></div>
                             </div>
                         </div>
-                        <div class="card-footer bg-c-blue border-0">
+                        {{-- <div class="card-footer bg-c-blue border-0">
                             <h6 class="text-white m-b-0">Stakes: 22</h6>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -36,9 +39,9 @@
                                 <div class="progress-bar bg-c-green" style="width:85%"></div>
                             </div>
                         </div>
-                        <div class="card-footer bg-c-green border-0">
+                        {{-- <div class="card-footer bg-c-green border-0">
                             <h6 class="text-white m-b-0">Winners: 85</h6>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 {{-- <div class="col-md-4">
