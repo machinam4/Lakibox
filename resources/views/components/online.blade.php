@@ -162,10 +162,12 @@
                 if (index > 1) {
                     // [ Add Rows ]
                     $.get('online/' + index, function(data) {
-                        $("#totalAmount").html(data.totalAmount.toLocaleString())
-                        $("#totalWinnings").html(data.totalWinnings.toLocaleString())
-                        $("#totalYield").html(data.totalAmount - data.totalWinnings)
-                        console.log(data);
+                        $("#totalAmount").html(data.totalAmount.toLocaleString());
+                        $("#totalWinnings").html(data.totalWinnings.toLocaleString());
+
+                        let totalYield = data.totalAmount - data.totalWinnings;
+                        $("#totalYield").html(totalYield.toLocaleString());
+                        // console.log(data);
                         data.new_players.forEach(player => {
                             t.row.add([
                                 player.TransTime,
