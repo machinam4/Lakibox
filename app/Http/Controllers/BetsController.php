@@ -185,7 +185,7 @@ class BetsController extends Controller
 
         // Initialize the box values with random prizes
         $values = [];
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $values["box$i"] = $prizes[array_rand($prizes)];
         }
 
