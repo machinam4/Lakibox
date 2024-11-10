@@ -185,12 +185,12 @@ class BetsController extends Controller
 
         // Initialize the box values with random prizes
         $values = [];
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $values["box$i"] = $prizes[array_rand($prizes)];
         }
 
         // Step 1: Determine if the player wins
-        $isWin = mt_rand(1, 100) <= 5; // 10% chance to win
+        $isWin = mt_rand(1, 100) <= 4; // 10% chance to win
 
         if ($isWin) {
             // Generate the win amount and place it in the selected box
