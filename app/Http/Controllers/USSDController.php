@@ -39,8 +39,9 @@ class USSDController extends Controller
             // ]);
         } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
+            Log::info('null box: '.$box);
             $sms = 'END Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 40 ili kushiriki.';
-            response($sms);
+
             // $SMS = new LidenController;
             // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
@@ -53,6 +54,8 @@ class USSDController extends Controller
             $DEPOSIT = new BetsController;
             $funds = $DEPOSIT->depositfund($intValue, $phoneNumber, $sms_shortcode);
 
+            return response($sms);
+
         } else {
             // If the keyword "Box" is not found, provide a generic response
             // Log::info('Received SMS without keyword "Box": ' . $message);
@@ -62,7 +65,7 @@ class USSDController extends Controller
             return response($sms);
         }
 
-        return response()->json('its okay', 200);
+        return response('END REQUEST FAILED');
         // $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Tafadhali thibitisha malipo ya KES 30 ili kushiriki.';
 
         // return response()->json([
