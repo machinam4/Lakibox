@@ -17,7 +17,7 @@ class USSDController extends Controller
         Log::info($data);
         // Check if the message contains the keyword "Box"
         $box = strtolower($message); // Convert to lowercase if needed
-        if ($box == 'box') {
+        if ($box == null) {
             // Perform actions based on the content of the message
             // You can customize this part to perform any specific actions you need.
             // Log::info('Received SMS without keyword "Box": ' . $message);
