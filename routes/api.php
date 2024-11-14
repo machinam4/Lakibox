@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MOSmsController;
 use App\Http\Controllers\MPESAResponseController;
+use App\Http\Controllers\USSDController;
 use App\Http\Controllers\WithdrawalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::post('/c2b/validation', [MPESAResponseController::class, 'validation']);
 Route::post('/c2b/express', [MPESAResponseController::class, 'express']);
 
 Route::post('/MO/sms', [MOSmsController::class, 'handle']);
+
+Route::post('/MO/ussd', [USSDController::class, 'handle']);
 
 // b2c routes
 Route::post('/b2c/result', [WithdrawalController::class, 'handleResult']);
