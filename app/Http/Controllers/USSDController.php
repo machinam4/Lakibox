@@ -24,7 +24,7 @@ class USSDController extends Controller
             // Respond to the SMS
             Log::info('null box: '.$box);
 
-            $sms = "CON Karibu LUCKYBOX!\n**\nPESA TASLIMU na MALI KEMKEM zimewekwa kwenye sanduku TANO.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI.Tuma chaguo lako kwa ".$sms_shortcode.' USHINDE sasa hivi!';
+            $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI. USHINDE sasa hivi!";
             // $SMS = new SMSController;
             // $SMS = new LidenController;
             // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
@@ -58,12 +58,7 @@ class USSDController extends Controller
             // Respond to the SMS
             $sms = "CON Umekosea!.\n**\nUlichagua $message.\n**\nCheza kwa kuchagua NUMBER (1-5).\n**\nMfano: 1\n**\nChagua TENA USHINDE!\n1:BOX 1\n2:BOX 2\n3:BOX 3\n4:BOX4\n5:BOX5\n**\**\nACC Bal: 0!";
 
-            return response()->json([
-                'msisdn' => $phoneNumber,
-                'sessionId' => $sessionId,
-                'serviceCode' => $sms_shortcode,
-                'ussdString' => $sms,
-            ]);
+            return response($sms);
         }
 
         return response()->json('its okay', 200);
