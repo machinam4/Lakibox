@@ -39,7 +39,7 @@ class USSDController extends Controller
             // ]);
         } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
-            $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 40 ili kushiriki.';
+            $sms = 'END Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 40 ili kushiriki.';
             response($sms);
             // $SMS = new LidenController;
             // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
