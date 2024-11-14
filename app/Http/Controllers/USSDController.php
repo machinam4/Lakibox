@@ -22,7 +22,7 @@ class USSDController extends Controller
             // You can customize this part to perform any specific actions you need.
             // Log::info('Received SMS without keyword "Box": ' . $message);
             // Respond to the SMS
-            Log::info('null box: '.$box);
+            // Log::info('null box: '.$box);
 
             $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
             // $SMS = new SMSController;
@@ -39,7 +39,7 @@ class USSDController extends Controller
             // ]);
         } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
-            Log::info('null box: '.$box);
+            // Log::info('null box: '.$box);
             $sms = 'END Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 40 ili kushiriki.';
 
             // $SMS = new LidenController;
