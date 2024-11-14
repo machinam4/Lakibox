@@ -22,19 +22,21 @@ class USSDController extends Controller
             // You can customize this part to perform any specific actions you need.
             // Log::info('Received SMS without keyword "Box": ' . $message);
             // Respond to the SMS
-            Log::info($box);
+            Log::info('null box: '.$box);
 
             $sms = "CON Karibu LUCKYBOX!\n**\nPESA TASLIMU na MALI KEMKEM zimewekwa kwenye sanduku TANO.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA au MALI.Tuma chaguo lako kwa ".$sms_shortcode.' USHINDE sasa hivi!';
             // $SMS = new SMSController;
             // $SMS = new LidenController;
             // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
-            return response()->json([
-                'msisdn' => $phoneNumber,
-                'sessionId' => $sessionId,
-                'serviceCode' => $sms_shortcode,
-                'ussdString' => $sms,
-            ]);
+            return response($sms);
+
+            // return response()->json([
+            //     'msisdn' => $phoneNumber,
+            //     'sessionId' => $sessionId,
+            //     'serviceCode' => $sms_shortcode,
+            //     'ussdString' => $sms,
+            // ]);
         } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
 
             // $sms = 'Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 30 ili kushiriki.';
