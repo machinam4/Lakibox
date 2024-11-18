@@ -30,7 +30,13 @@ class USSDController extends Controller
 
             // Step 2: Box selection
         } elseif ($sessionState === 'select_box' && preg_match("/^(box\s?[1-5]|^[1-5])$/i", $message, $matches)) {
-            $box = (int) filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
+
+            // Extract and convert the integer part
+            if (preg_match("/(\d+)/", $matches[0], $intMatches)) {
+                $box = (int) $intMatches[0];
+            }
+
+            // $box = (int) filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
 
             Session::put("ussd_session_state_{$sessionId}", 'input_stake');
             Session::put("ussd_session_box_choice_{$sessionId}", $box);
