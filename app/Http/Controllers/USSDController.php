@@ -20,6 +20,8 @@ class USSDController extends Controller
         // Retrieve or initialize the session state
         $sessionState = Session::get("ussd_session_state_{$sessionId}", 'start');
 
+        Log::info('session state: '.$sessionState);
+
         // Step 1: Welcome message and box selection
         if (is_null($message) && $sessionState === 'start') {
             Session::put("ussd_session_state_{$sessionId}", 'select_box');
@@ -29,7 +31,7 @@ class USSDController extends Controller
             return response($sms);
 
             // Step 2: Box selection
-        } elseif ($sessionState === 'select_box' && preg_match("/^(box\s?[1-5]|^[1-5])$/i", $message, $matches)) {
+        } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $message, $matches) && $sessionState === 'select_box') {
 
             // Extract and convert the integer part
             if (preg_match("/(\d+)/", $matches[0], $intMatches)) {
