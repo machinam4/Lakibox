@@ -20,7 +20,7 @@ class USSDController extends Controller
         // Retrieve or initialize the session state
         $sessionState = Session::get("ussd_session_state_{$sessionId}");
 
-        Log::info('session state: '.$sessionState);
+        Log::info('session state: '.Session::get());
 
         // Step 1: Welcome message and box selection
         if (is_null($message)) {
