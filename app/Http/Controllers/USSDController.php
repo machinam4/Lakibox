@@ -14,8 +14,8 @@ class USSDController extends Controller
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
-        $sms_shortcode = urldecode($data['serviceCode']) === '*835*564#' ? '24119' : '23089';
-        Log::info($data);
+        $sms_shortcode = urldecode($data['serviceCode']) === '*835*564#' ? '24119' : '24119';
+        // Log::info($sms_shortcode);
 
         if ($message) {
             $inputs = explode('*', urldecode($message));
@@ -33,7 +33,7 @@ class USSDController extends Controller
         if (is_null($message) && $sessionState === 'start') {
             Cache::put("ussd_session_state_{$sessionId}", 'select_box');
 
-            $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
+            $sms = "CON SHINDA mpaka 500,000!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
 
             return response($sms);
 
@@ -50,7 +50,7 @@ class USSDController extends Controller
             Cache::put("ussd_session_state_{$sessionId}", 'input_stake');
             Cache::put("ussd_session_box_choice_{$sessionId}", $box);
 
-            $sms = 'CON Umechagua Box '.$box."\nWeka stake yako (Min. 40: Max 3000) kushiriki: ";
+            $sms = 'CON Umechagua Box '.$box."\nWeka stake yako (Min. 40; Max 3000) kushiriki: ";
 
             return response($sms);
 
@@ -59,7 +59,7 @@ class USSDController extends Controller
             $stakeAmount = (float) $message;
 
             if ($stakeAmount < 40) {
-                $response = "CON Kiasi cha stake lazima kiwe angalau KES 40.\nJaribu tena:";
+                $response = "CON Kiasi cha stake lazima kiwe zaidi KES 40.\nJaribu tena:";
 
                 return response($response);
             }
