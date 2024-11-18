@@ -11,7 +11,7 @@ class USSDController extends Controller
     public function handle(Request $request)
     {
         $data = $request->all();
-        $message = $data['ussdString'];
+        $message = $data['ussdString'] ? end(explode('*', urldecode($message))) : null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
         $sms_shortcode = $data['serviceCode'];
