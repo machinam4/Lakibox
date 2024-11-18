@@ -18,13 +18,13 @@ class USSDController extends Controller
         Log::info($data);
 
         // Retrieve or initialize the session state
-        $sessionState = Session::get("ussd_session_state_{$sessionId}");
+        $sessionState = Session::get("ussd_session_state_{$sessionId}", 'start');
 
-        Log::info('session state: '.Session::get());
+        Log::info('session state: '.$sessionState);
 
         // Step 1: Welcome message and box selection
-        if (is_null($message)) {
-            Session::put("ussd_session_state_{$sessionId}", 'select_box');
+        if (is_null($message) && $sessionState === 'start') {
+            Session::get("ussd_session_state_{$sessionId}", 'select_box');
 
             $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
 
