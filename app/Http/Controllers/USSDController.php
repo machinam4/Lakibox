@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
 class USSDController extends Controller
 {
@@ -18,13 +18,13 @@ class USSDController extends Controller
         Log::info($data);
 
         // Retrieve or initialize the session state
-        $sessionState = $request->session()->get("ussd_session_state_{$sessionId}", 'start');
+        $sessionState = Cache::get("ussd_session_state_{$sessionId}", 'start');
 
         Log::info('session state: '.$sessionState);
 
         // Step 1: Welcome message and box selection
         if (is_null($message) && $sessionState === 'start') {
-            $request->session()->put("ussd_session_state_{$sessionId}", 'select_box');
+            Cache::get("ussd_session_state_{$sessionId}", 'select_box');
 
             $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
 
@@ -40,8 +40,8 @@ class USSDController extends Controller
 
             // $box = (int) filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
 
-            $request->session()->put("ussd_session_state_{$sessionId}", 'input_stake');
-            $request->session()->put("ussd_session_box_choice_{$sessionId}", $box);
+            Cache::put("ussd_session_state_{$sessionId}", 'input_stake');
+            Cache::put("ussd_session_box_choice_{$sessionId}", $box);
 
             $sms = 'CON Umechagua Box '.$box.'\nTafadhali weka kiasi unachotaka kucheza (Stake) katika KES:';
 
@@ -57,15 +57,20 @@ class USSDController extends Controller
                 return response($response);
             }
 
-            $request->session()->put("ussd_session_state_{$sessionId}", 'confirm_choice');
-            $request->session()->put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
+            Cache::put("ussd_session_state_{$sessionId}", 'confirm_choice');
+            Cache::put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
 
-            $boxChoice = Session::get("ussd_session_box_choice_{$sessionId}");
+            $boxChoice = Cache::get("ussd_session_box_choice_{$sessionId}");
 
             $sms = "END Umechagua Box $boxChoice na kiasi cha KES $stakeAmount.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
 
             $DEPOSIT = new BetsController;
             $funds = $DEPOSIT->depositfund($boxChoice, $phoneNumber, $sms_shortcode);
+
+            //clear cache
+            Cache::forget("ussd_session_state_{$sessionId}");
+            Cache::forget("ussd_session_box_choice_{$sessionId}");
+            Cache::forget("ussd_session_stake_amount_{$sessionId}");
 
             return response($sms);
 
