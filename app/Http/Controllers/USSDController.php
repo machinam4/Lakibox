@@ -11,12 +11,19 @@ class USSDController extends Controller
     public function handle(Request $request)
     {
         $data = $request->all();
-        $message = $data['ussdString'];
+        $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
         $sms_shortcode = $data['serviceCode'];
         Log::info($data);
-        $message = $message ? end(explode('*', urldecode($message))) : null;
+
+        if ($message) {
+            $inputs = explode('*', urldecode($message));
+            $message = end($inputs); // Safely get the last value
+        } else {
+            $message = null;
+        }
+
         // Retrieve or initialize the session state
         $sessionState = Cache::get("ussd_session_state_{$sessionId}", 'start');
 
