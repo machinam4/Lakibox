@@ -50,7 +50,7 @@ class USSDController extends Controller
             Cache::put("ussd_session_state_{$sessionId}", 'input_stake');
             Cache::put("ussd_session_box_choice_{$sessionId}", $box);
 
-            $sms = 'CON Umechagua Box '.$box."\nTafadhali weka kiasi unachotaka kucheza (Stake) katika KES: ";
+            $sms = 'CON Umechagua Box '.$box."\nWeka stake yako (Min. 40: Max 3000) kushiriki: ";
 
             return response($sms);
 
@@ -59,7 +59,7 @@ class USSDController extends Controller
             $stakeAmount = (float) $message;
 
             if ($stakeAmount < 40) {
-                $response = "CON Kiasi cha stake lazima kiwe angalau KES 40.\nTafadhali jaribu tena:";
+                $response = "CON Kiasi cha stake lazima kiwe angalau KES 40.\nJaribu tena:";
 
                 return response($response);
             }
@@ -69,10 +69,10 @@ class USSDController extends Controller
 
             $boxChoice = Cache::get("ussd_session_box_choice_{$sessionId}");
 
-            $sms = "END Umechagua Box $boxChoice na kiasi cha KES $stakeAmount.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
+            $sms = "END Umechagua Box: $boxChoice \n Stake: $stakeAmount.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
 
             $DEPOSIT = new BetsController;
-            $funds = $DEPOSIT->depositfund($boxChoice, $phoneNumber, $sms_shortcode);
+            $funds = $DEPOSIT->depositfund($boxChoice, $phoneNumber, $sms_shortcode, $stakeAmount);
 
             //clear cache
             Cache::forget("ussd_session_state_{$sessionId}");

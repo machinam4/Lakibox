@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Log;
 
 class BetsController extends Controller
 {
-    public function depositfund($box, $phoneNumber, $sms_shortcode)
+    public function depositfund($box, $phoneNumber, $sms_shortcode, $stakeAmount = null)
     {
+        $stakeAmount = $stakeAmount ?? env('GAME_AMOUNT');
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
@@ -16,7 +17,7 @@ class BetsController extends Controller
             'Password' => base64_encode(env('MPESA_SHORTCODE').env('MPESA_PASSKEY').$timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
-            'Amount' => env('GAME_AMOUNT'),
+            'Amount' => $stakeAmount,
             'PartyA' => $phoneNumber,
             'PartyB' => env('MPESA_SHORTCODE'),
             'PhoneNumber' => $phoneNumber,
