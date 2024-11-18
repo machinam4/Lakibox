@@ -48,7 +48,7 @@ class USSDController extends Controller
             return response($sms);
 
             // Step 3: Request stake amount
-        } elseif ($sessionState === 'enter_stake' && is_numeric($message)) {
+        } elseif ($sessionState === 'input_stake' && is_numeric($message)) {
             $stakeAmount = (float) $message;
 
             if ($stakeAmount < 40) {
@@ -57,7 +57,7 @@ class USSDController extends Controller
                 return response($response);
             }
 
-            Cache::put("ussd_session_state_{$sessionId}", 'confirm_choice');
+            // Cache::put("ussd_session_state_{$sessionId}", 'confirm_choice');
             Cache::put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
 
             $boxChoice = Cache::get("ussd_session_box_choice_{$sessionId}");
