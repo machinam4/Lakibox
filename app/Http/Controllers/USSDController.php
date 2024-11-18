@@ -18,13 +18,13 @@ class USSDController extends Controller
         Log::info($data);
 
         // Retrieve or initialize the session state
-        $sessionState = Session::get("ussd_session_state_{$sessionId}", 'start');
+        $sessionState = $request->session()->get("ussd_session_state_{$sessionId}", 'start');
 
         Log::info('session state: '.$sessionState);
 
         // Step 1: Welcome message and box selection
         if (is_null($message) && $sessionState === 'start') {
-            Session::get("ussd_session_state_{$sessionId}", 'select_box');
+            $request->session()->put("ussd_session_state_{$sessionId}", 'select_box');
 
             $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
 
@@ -40,8 +40,8 @@ class USSDController extends Controller
 
             // $box = (int) filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
 
-            Session::put("ussd_session_state_{$sessionId}", 'input_stake');
-            Session::put("ussd_session_box_choice_{$sessionId}", $box);
+            $request->session()->put("ussd_session_state_{$sessionId}", 'input_stake');
+            $request->session()->put("ussd_session_box_choice_{$sessionId}", $box);
 
             $sms = 'CON Umechagua Box '.$box.'\nTafadhali weka kiasi unachotaka kucheza (Stake) katika KES:';
 
@@ -57,8 +57,8 @@ class USSDController extends Controller
                 return response($response);
             }
 
-            Session::put("ussd_session_state_{$sessionId}", 'confirm_choice');
-            Session::put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
+            $request->session()->put("ussd_session_state_{$sessionId}", 'confirm_choice');
+            $request->session()->put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
 
             $boxChoice = Session::get("ussd_session_box_choice_{$sessionId}");
 
