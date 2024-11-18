@@ -15,44 +15,48 @@ class USSDController extends Controller
         $sessionId = $data['sessionId'];
         $sms_shortcode = $data['serviceCode'];
         Log::info($data);
-        // Check if the message contains the keyword "Box"
-        $box = $message; // Convert to lowercase if needed
-        if (is_null($box)) {
-            // Perform actions based on the content of the message
-            // You can customize this part to perform any specific actions you need.
-            // Log::info('Received SMS without keyword "Box": ' . $message);
-            // Respond to the SMS
-            // Log::info('null box: '.$box);
+
+        // Retrieve or initialize the session state
+        $sessionState = Session::get("ussd_session_state_{$sessionId}", 'start');
+
+        // Step 1: Welcome message and box selection
+        if (is_null($message) && $sessionState === 'start') {
+            Session::put("ussd_session_state_{$sessionId}", 'select_box');
 
             $sms = "CON Karibu LUCKYBOX!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
-            // $SMS = new SMSController;
-            // $SMS = new LidenController;
-            // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
 
             return response($sms);
 
-            // return response()->json([
-            //     'msisdn' => $phoneNumber,
-            //     'sessionId' => $sessionId,
-            //     'serviceCode' => $sms_shortcode,
-            //     'ussdString' => $sms,
-            // ]);
-        } elseif (preg_match("/^(box\s?[1-5]|^[1-5])$/i", $box, $matches)) { // Use a regular expression to match "box 1" to "box 5" or values from 1 to 5 in a case-insensitive way
+            // Step 2: Box selection
+        } elseif ($sessionState === 'select_box' && preg_match("/^(box\s?[1-5]|^[1-5])$/i", $message, $matches)) {
+            $box = (int) filter_var($matches[0], FILTER_SANITIZE_NUMBER_INT);
 
-            // Log::info('null box: '.$box);
-            $sms = 'END Ujumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao. Thibitisha malipo ya KES 40 ili kushiriki.';
+            Session::put("ussd_session_state_{$sessionId}", 'input_stake');
+            Session::put("ussd_session_box_choice_{$sessionId}", $box);
 
-            // $SMS = new LidenController;
-            // $sendSMS = $SMS->sendSMS($sms, $phoneNumber);
+            $sms = 'CON Umechagua Box '.$box.'\nTafadhali weka kiasi unachotaka kucheza (Stake) katika KES:';
 
-            // Extract and convert the integer part
-            if (preg_match("/(\d+)/", $matches[0], $intMatches)) {
-                $intValue = (int) $intMatches[0];
+            return response($sms);
+
+            // Step 3: Request stake amount
+        } elseif ($sessionState === 'enter_stake' && is_numeric($message)) {
+            $stakeAmount = (float) $message;
+
+            if ($stakeAmount < 40) {
+                $response = "CON Kiasi cha stake lazima kiwe angalau KES 40.\nTafadhali jaribu tena:";
+
+                return response($response);
             }
-            //    echo $intValue; // Output: "3"
+
+            Session::put("ussd_session_state_{$sessionId}", 'confirm_choice');
+            Session::put("ussd_session_stake_amount_{$sessionId}", $stakeAmount);
+
+            $boxChoice = Session::get("ussd_session_box_choice_{$sessionId}");
+
+            $sms = "END Umechagua Box $boxChoice na kiasi cha KES $stakeAmount.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
 
             $DEPOSIT = new BetsController;
-            $funds = $DEPOSIT->depositfund($intValue, $phoneNumber, $sms_shortcode);
+            $funds = $DEPOSIT->depositfund($boxChoice, $phoneNumber, $sms_shortcode);
 
             return response($sms);
 
