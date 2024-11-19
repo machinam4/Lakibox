@@ -14,7 +14,7 @@ class USSDController extends Controller
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
-        $sms_shortcode = urldecode($data['serviceCode']) === '*835*564#' ? '24119' : '24119';
+        $sms_shortcode = urldecode($data['serviceCode']) === '*864#' ? 'EMART_LTD' : '24119';
         // Log::info($sms_shortcode);
 
         if ($message) {
