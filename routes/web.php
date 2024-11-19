@@ -31,7 +31,7 @@ Route::middleware(['auth'])->controller(DashboardController::class)->group(funct
 });
 Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
 
-Route::get('/send-message/{message}/{phone}/{shortcode}', [OnfonSmsController::class, 'sendSMS']);
+// Route::get('/send-message/{message}/{phone}/{shortcode}', [OnfonSmsController::class, 'sendSMS']);
 
 //b2c test routes
 Route::get('/mpesa/b2c/{phone}/{amount}', [WithdrawalController::class, 'b2cPaymentRequest']);
