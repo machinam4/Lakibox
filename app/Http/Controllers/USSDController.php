@@ -14,7 +14,7 @@ class USSDController extends Controller
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
-        $sms_shortcode = urldecode($data['serviceCode']) === '*864#' ? 'EMART_LTD' : '24119';
+        $sms_shortcode = urldecode($data['serviceCode']) === '*864#' ? 'EMART_LTD' : 'EMART_LTD';
         // Log::info($sms_shortcode);
 
         if ($message) {
@@ -27,7 +27,7 @@ class USSDController extends Controller
         // Retrieve or initialize the session state
         $sessionState = Cache::get("ussd_session_state_{$sessionId}", 'start');
 
-        Log::info('session state: '.$sessionState);
+        // Log::info('session state: '.$sessionState);
 
         // Step 1: Welcome message and box selection
         if (is_null($message) && $sessionState === 'start') {
