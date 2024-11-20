@@ -48,7 +48,7 @@ class USSDController extends Controller
             $sms = "END Umechagua Box: $box.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
 
             $DEPOSIT = new BetsController;
-            $funds = $DEPOSIT->depositfund($box, $phoneNumber, $sms_shortcode, $stakeAmount);
+            $funds = $DEPOSIT->depositfund($box, $phoneNumber, $sms_shortcode);
 
             //clear cache
             Cache::forget("ussd_session_state_{$sessionId}");
