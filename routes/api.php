@@ -26,11 +26,15 @@ Route::post('/c2b/confirmation', [MPESAResponseController::class, 'confirmation'
 Route::post('/c2b/validation', [MPESAResponseController::class, 'validation']);
 Route::post('/c2b/express', [MPESAResponseController::class, 'express']);
 
+Route::post('/MO/ussd', [USSDController::class, 'handle']); //handles onfon836
+Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
+
+Route::post('/MO/sms/v2', [MOSmsController::class, 'handlev2']); //handles onfon
+
+//other providers
+
 // Route::post('/MO/sms', [MOSmsController::class, 'handle']);
-
-Route::post('/MO/ussd', [USSDController::class, 'handle']);
-
-Route::post('/MO/sms/v2', [MOSmsController::class, 'handlev2']);
+Route::post('/MO/ussd/v2', [USSDController::class, 'handle']);
 
 // b2c routes
 Route::post('/b2c/result', [WithdrawalController::class, 'handleResult']);
