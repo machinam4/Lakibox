@@ -69,6 +69,9 @@ class USSDController extends Controller
     public function handle245(Request $request)
     {
         $data = $request->all();
+
+        Log::info($data);
+
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
