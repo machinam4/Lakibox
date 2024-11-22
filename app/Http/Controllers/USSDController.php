@@ -72,10 +72,10 @@ class USSDController extends Controller
 
         Log::info($data);
 
-        $message = $data['ussdString'] ?? null;
-        $phoneNumber = $data['msisdn'];
-        $sessionId = $data['sessionId'];
-        $sms_shortcode = urldecode($data['serviceCode']) === '*864#' ? 'EMART_LTD' : 'EMART_LTD';
+        $message = $data['USSD_STRING'] ?? null;
+        $phoneNumber = $data['MSISDN'];
+        $sessionId = $data['SESSION_ID'];
+        $sms_shortcode = urldecode($data['SERVICE_CODE']) === '*245#' ? 'EMART_LTD' : 'EMART_LTD';
         Log::info($sms_shortcode);
 
         if ($message) {
