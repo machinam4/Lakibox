@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\B2CResponse;
+use App\Models\B2CWallet;
 use App\Models\Deposits;
+use App\Models\MobileIncoming;
+use App\Models\MobileOutgoing;
+use App\Models\PaybillWallet;
+use App\Models\Platforms;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -122,5 +127,135 @@ class DashboardController extends Controller
 
         return view('filter', ['players' => $players, 'totalToday' => $totalToday, 'totalWinnings' => $totalWinnings, 'fromDate' => $from_date,
             'toDate' => $to_date, ]);
+    }
+
+    public function paybills()
+    {
+        $paybills = PaybillWallet::all();
+
+        return view('paybills', ['paybills' => $paybills]);
+    }
+
+    public function create_paybill(Request $request)
+    {
+
+        $data = [
+            'name' => $request->orgname,
+            'shortcode' => $request->shortcode,
+            'initiator' => $request->initiator,
+            'SecurityCredential' => $request->SecurityCredential,
+            'key' => $request->key,
+            'secret' => $request->secret,
+            'passkey' => $request->passkey,
+        ];
+        $paybills = PaybillWallet::create($data);
+
+        return redirect()->route('paybills');
+    }
+
+    public function b2cs()
+    {
+        $b2cs = B2CWallet::all();
+
+        return view('b2cs', ['b2cs' => $b2cs]);
+    }
+
+    public function create_b2c(Request $request)
+    {
+
+        $data = [
+            'name' => $request->orgname,
+            'shortcode' => $request->shortcode,
+            'initiator' => $request->initiator,
+            'SecurityCredential' => $request->SecurityCredential,
+            'key' => $request->key,
+            'secret' => $request->secret,
+            'passkey' => $request->passkey,
+        ];
+        $b2cs = B2CWallet::create($data);
+
+        return redirect()->route('b2cs');
+    }
+
+    public function incomings()
+    {
+        $incomings = MobileIncoming::all();
+
+        return view('incomings', ['incomings' => $incomings]);
+    }
+
+    public function create_incoming(Request $request)
+    {
+
+        $data = [
+            'csp' => $request->csp,
+            'type' => $request->type,
+            'shortcode' => $request->shortcode,
+            'api_pass' => $request->api_pass,
+            'api_user' => $request->api_user,
+            'api_url' => $request->api_url,
+            'api_key' => $request->api_key,
+        ];
+        $b2cs = MobileIncoming::create($data);
+
+        return redirect()->route('incomings');
+    }
+
+    public function outgoings()
+    {
+        $outgoings = MobileOutgoing::all();
+
+        return view('outgoings', ['outgoings' => $outgoings]);
+    }
+
+    public function create_outgoing(Request $request)
+    {
+
+        $data = [
+            'csp' => $request->csp,
+            'type' => $request->type,
+            'shortcode' => $request->shortcode,
+            'api_pass' => $request->api_pass,
+            'api_user' => $request->api_user,
+            'api_url' => $request->api_url,
+            'api_key' => $request->api_key,
+        ];
+        $b2cs = MobileOutgoing::create($data);
+
+        return redirect()->route('outgoings');
+    }
+
+    public function platforms()
+    {
+        $platforms = Platforms::all();
+        $paybills = PaybillWallet::all();
+        $b2cs = B2CWallet::all();
+        $senders = MobileOutgoing::all();
+        $incomings = MobileIncoming::all();
+
+        return view('platforms', ['platforms' => $platforms, 'paybills' => $paybills,
+            'b2cs' => $b2cs,
+            'senders' => $senders,
+            'incomings' => $incomings]);
+    }
+
+    public function create_platform(Request $request)
+    {
+
+        $data = [
+            'platform' => $request->platform,
+            'mobile_incoming' => $request->mobile_incoming,
+            'mobile_outgoing' => $request->mobile_outgoing,
+            'b2c_wallet' => $request->b2c_wallet,
+            'paybill_wallet' => $request->paybill_wallet,
+            'bet_minimum' => $request->bet_minimum,
+            'bet_maximum' => $request->bet_maximum,
+            'win_ratio' => $request->win_ratio,
+            'win_maximum' => $request->win_maximum,
+            'win_minimum' => $request->win_minimum,
+        ];
+        $b2cs = Platforms::create($data);
+
+        return redirect()->route('platforms');
     }
 }

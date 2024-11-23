@@ -33,4 +33,9 @@ class Deposits extends Model
     {
         return $this->hasOne(Players::class, 'TransID', 'TransID');
     }
+
+    public function platform()
+    {
+        return $this->hasOne(Platforms::class, 'id', 'SmsShortcode');
+    }
 }

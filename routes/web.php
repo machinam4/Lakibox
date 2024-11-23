@@ -27,6 +27,28 @@ Route::middleware(['auth'])->controller(DashboardController::class)->group(funct
     Route::get('/online/{index}', 'online')->name('online');
     Route::get('/radios', 'radios')->name('radios');
     Route::post('/radios/create', 'create_radio')->name('create_radio');
+
+    Route::prefix('/mpesa')->group(function () {
+        Route::get('/paybills', 'paybills')->name('paybills');
+        Route::post('/paybills', 'create_paybill')->name('create_paybill');
+
+        Route::get('/b2cs', 'b2cs')->name('b2cs');
+        Route::post('/b2cs', 'create_b2c')->name('create_b2c');
+    });
+
+    Route::prefix('/sms')->group(function () {
+        Route::get('/incomings', 'incomings')->name('incomings');
+        Route::post('/incomings', 'create_incoming')->name('create_incoming');
+
+        Route::get('/outgoings', 'outgoings')->name('outgoings');
+        Route::post('/outgoings', 'create_outgoing')->name('create_outgoing');
+    });
+
+    Route::prefix('/platforms')->group(function () {
+        Route::get('/', 'platforms')->name('platforms');
+        Route::post('/', 'create_platform')->name('create_platform');
+    });
+
     Route::post('/filter', 'filter')->name('filter');
 });
 Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);

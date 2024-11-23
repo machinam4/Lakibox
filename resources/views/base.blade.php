@@ -80,6 +80,30 @@
                                         class="feather icon-home"></i></span><span
                                     class="pcoded-mtext">Radios</span></a>
                         </li>
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('platforms') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span
+                                    class="pcoded-mtext">Platforms</span></a>
+                        </li>
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('paybills') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span
+                                    class="pcoded-mtext">Paybills</span></a>
+                        </li>
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('b2cs') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span class="pcoded-mtext">B2C</span></a>
+                        </li>
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('incomings') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span
+                                    class="pcoded-mtext">Incoming</span></a>
+                        </li>
+                        <li data-username="radios lakibox evoton emartmobile" class="nav-item">
+                            <a href="{{ Route('outgoings') }}" class="nav-link"><span class="pcoded-micon"><i
+                                        class="feather icon-home"></i></span><span
+                                    class="pcoded-mtext">Outgoing</span></a>
+                        </li>
                     @endif
                     </li>
                     <li class="nav-item pcoded-menu-caption">
@@ -104,7 +128,8 @@
                     <i class="fas fa-bolt"></i>
                 </div>
                 <span class="b-title">Dasho</span> -->
-                <img src="{{ asset('assets/images/ridhishajamii-wor-logo.svg') }}" alt="LAKI BOX" class="logo images">
+                <img src="{{ asset('assets/images/ridhishajamii-wor-logo.svg') }}" alt="LAKI BOX"
+                    class="logo images">
                 <img src="{{ asset('assets/images/ridhishajamii-icon-logo.svg') }}" alt=""
                     class="logo-thumb images">
             </a>

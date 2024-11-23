@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Log;
 
 class BetsController extends Controller
 {
-    public function depositfund($box, $phoneNumber, $sms_shortcode, $stakeAmount = null)
+    public function depositfund($box, $phoneNumber, $platform, $stakeAmount = null)
     {
-        $stakeAmount = $stakeAmount ?? env('GAME_AMOUNT');
+        $stakeAmount = $stakeAmount ?? $platform->bet_minimum;
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
             'BusinessShortCode' => env('MPESA_SHORTCODE'),
-            'Password' => base64_encode(env('MPESA_SHORTCODE').env('MPESA_PASSKEY').$timestamp),
+            'Password' => base64_encode($platform->paybill->secret.$platform->paybill->secret.$timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $stakeAmount,
@@ -48,7 +48,7 @@ class BetsController extends Controller
                     'BusinessShortCode' => env('MPESA_SHORTCODE'),
                     'BillRefNumber' => "Box $box",
                     'MSISDN' => $phoneNumber,
-                    'SmsShortcode' => $sms_shortcode,
+                    'SmsShortcode' => $platform->id,
                 ];
                 // dd($res_data);
                 Deposits::Create($res_data);
@@ -170,7 +170,7 @@ class BetsController extends Controller
     //     // return response()->json(['login' => 'accepted'], 200);
     // }
 
-    public function placeBet(string $box)
+    public function placeBet(string $box, $platform)
     {
         $prizes = [
             number_format(round(random_int(50000, 100000), -4)),
@@ -191,11 +191,11 @@ class BetsController extends Controller
         }
 
         // Step 1: Determine if the player wins
-        $isWin = mt_rand(1, 100) <= 4; // 10% chance to win
+        $isWin = mt_rand(1, 100) <= $platform->win_ratio; // 10% chance to win
 
         if ($isWin) {
             // Generate the win amount and place it in the selected box
-            $winAmount = $this->generateWinAmount();
+            $winAmount = $this->generateWinAmount($platform->win_minimum, $platform->win_maximum);
             $values["box$selectedBox"] = number_format($winAmount);
 
             return [
@@ -218,9 +218,9 @@ class BetsController extends Controller
     }
 
     // Helper function to generate the winning amount
-    private function generateWinAmount()
+    private function generateWinAmount($min, $max)
     {
-        // 80% chance the win amount is below 500, 20% chance between 500 and 999
-        return mt_rand(1, 100) <= 80 ? mt_rand(30, 100) : mt_rand(101, 299);
+        // 80% chance the win amount is below 100, 20% chance between 500 and 999
+        return mt_rand(1, 100) <= 80 ? mt_rand($min, 100) : mt_rand(101, $max);
     }
 }

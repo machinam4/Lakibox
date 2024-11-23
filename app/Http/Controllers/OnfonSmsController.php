@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 class OnfonSmsController extends Controller
 {
     // bulk.ke sms sending
-    public function sendSMS($message, $phone, $shortcode)
+    public function sendSMS($message, $phone, $outgoing)
     {
         $curl = curl_init();
 
         // Prepare the data as an associative array
         $data = [
-            'SenderId' => $shortcode, // Replace with your sender ID
+            'SenderId' => $outgoing->shortcode, // Replace with your sender ID
             'IsUnicode' => true,
             'IsFlash' => true,
             // 'ScheduleDateTime' => 'string', // Replace with your date and time in proper format
@@ -21,11 +21,11 @@ class OnfonSmsController extends Controller
                     'Text' => $message,       // Replace with the actual message text
                 ],
             ],
-            'ApiKey' => '5HBZ8e0C7DkbINqlvoUwFOYGaWzSxTdAu23Es46c1gpJM9yh', // Replace with your API key
-            'ClientId' => 'emart', // Replace with your client ID
+            'ApiKey' => $outgoing->api_key, // Replace with your API key
+            'ClientId' => $outgoing->api_user, // Replace with your client ID
         ];
         curl_setopt_array($curl, [
-            CURLOPT_URL => 'https://api.onfonmedia.co.ke/v1/sms/SendBulkSMS',
+            CURLOPT_URL => $outgoing->api_url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -35,7 +35,7 @@ class OnfonSmsController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode($data),  // Encode the array to JSON
             CURLOPT_HTTPHEADER => [
-                'AccessKey: 5HBZ8e0C7DkbINqlvoUwFOYGaWzSxTdAu23Es46c1gpJM9yh',
+                "AccessKey: $outgoing->api_url",
                 'Content-Type: application/json',
             ],
         ]);
