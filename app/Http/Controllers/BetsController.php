@@ -10,6 +10,8 @@ class BetsController extends Controller
     public function depositfund($box, $phoneNumber, $platform, $stakeAmount = null)
     {
         $stakeAmount = $stakeAmount ?? $platform->bet_minimum;
+
+        Log::info($platform);
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
@@ -25,8 +27,8 @@ class BetsController extends Controller
             'AccountReference' => "Box $box",
             'TransactionDesc' => 'Lucky Box '.$box,
         ];
-        // dd($data);
-        // dd(response()->json($data, 200));
+        Log::info($data);
+        Log::info(response()->json($data, 200));
 
         // TO:DO wait for mpesa to finish transaction the send notifi to user
 
