@@ -16,7 +16,7 @@ class BetsController extends Controller
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
             'BusinessShortCode' => $platform->paybill->shortcode,
-            'Password' => base64_encode($platform->paybill->secret.$platform->paybill->key.$timestamp),
+            'Password' => base64_encode($platform->paybill->shortcode.$platform->paybill->passkey.$timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $stakeAmount,
