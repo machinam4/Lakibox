@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class WithdrawalController extends Controller
 {
-    public function generateAccessToken() //Active
+    public function generateAccessToken($b2c) //Active
     {
         // *** Authorization Request in PHP ***|
         $mpesaUrl = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
@@ -20,7 +20,7 @@ class WithdrawalController extends Controller
                 CURLOPT_HTTPHEADER => ['Content-Type:application/json; charset=utf8'],
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HEADER => false,
-                CURLOPT_USERPWD => env('B2C_CONSUMER_KEY').':'.env('B2C_CONSUMER_SECRET'),
+                CURLOPT_USERPWD => $b2c->key.':'.$b2c->secret,
             ]
         );
         $response = json_decode(curl_exec($ch));
@@ -29,11 +29,11 @@ class WithdrawalController extends Controller
         return $response->access_token;
     }
 
-    public function sendRequest($mpesa_url, $curl_post_data)
+    public function sendRequest($mpesa_url, $curl_post_data, $b2c)
     {
         $ch = curl_init($mpesa_url);
         curl_setopt($ch, CURLOPT_URL, $mpesa_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer '.$this->generateAccessToken(), 'Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer '.$this->generateAccessToken($b2c), 'Content-Type: application/json']);
         $data_string = json_encode($curl_post_data, JSON_UNESCAPED_SLASHES);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -47,20 +47,21 @@ class WithdrawalController extends Controller
         return $curl_response;
     }
 
-    public function b2cPaymentRequest($phone, $amount, $smsshortcode = 'none')
+    public function b2cPaymentRequest($phone, $amount, $platform)
     {
+        $platform = Platforms::find($platform)
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
-        $ConversationID = $timestamp.'-'.$smsshortcode;
+        $ConversationID = $timestamp.'-'.$platform->outgoing->smsshortcode;
         // Log::info($ConversationID);
         // Payload data to send with the request
         $data = [
             'OriginatorConversationID' => $ConversationID,
             'InitiatorName' => 'EMART API',
-            'SecurityCredential' => env('B2C_SECURITY_CREDENTIAL'),
+            'SecurityCredential' => $platform->b2c->SecurityCredential,
             'CommandID' => 'PromotionPayment',
             'Amount' => $amount,
-            'PartyA' => env('B2C_SHORTCODE'),
+            'PartyA' => $platform->b2c->shortcode,
             'PartyB' => $phone,
             'Remarks' => 'winner box 2',
             'QueueTimeOutURL' => 'https://lakibox.ridhishajamii.com/api/b2c/queue',
@@ -71,7 +72,7 @@ class WithdrawalController extends Controller
         ];
 
         try {
-            $response = json_decode($this->sendRequest($mpesaUrl, $data));
+            $response = json_decode($this->sendRequest($mpesaUrl, $data, $b2c));
 
             if (isset($response->errorCode)) {
                 // Log::info(json_encode($response));

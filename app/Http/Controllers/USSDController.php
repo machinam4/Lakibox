@@ -125,7 +125,7 @@ class USSDController extends Controller
                 Cache::put("ussd_session_state_{$sessionId}", 'input_stake');
                 Cache::put("ussd_session_box_choice_{$sessionId}", $box);
 
-                $sms = 'CON Umechagua Box '.$box."\nWeka stake yako (Min. 40; Max 3000) kushiriki: ";
+                $sms = 'CON Umechagua Box '.$box."\nWeka stake yako (Min. $platform->bet_minimum; Max $platform->bet_maximum) kushiriki: ";
 
                 return response($sms);
 

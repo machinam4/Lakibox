@@ -11,7 +11,7 @@ class BetsController extends Controller
     {
         $stakeAmount = $stakeAmount ?? $platform->bet_minimum;
 
-        Log::info($platform->paybill);
+        // Log::info($platform->paybill);
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
@@ -27,8 +27,8 @@ class BetsController extends Controller
             'AccountReference' => "Box $box",
             'TransactionDesc' => 'Lucky Box '.$box,
         ];
-        Log::info($data);
-        Log::info(response()->json($data, 200));
+        // Log::info($data);
+        // Log::info(response()->json($data, 200));
 
         // TO:DO wait for mpesa to finish transaction the send notifi to user
 
@@ -52,7 +52,7 @@ class BetsController extends Controller
                     'MSISDN' => $phoneNumber,
                     'SmsShortcode' => $platform->id,
                 ];
-                Log::info($res_data);
+                // Log::info($res_data);
                 Deposits::Create($res_data);
                 // Log::info('stk sent');
             }
