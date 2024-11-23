@@ -39,7 +39,7 @@
                                         <th>{{ $winner->transaction_id }}</th>
                                         <th>{{ $winner->receiver_party_public_name }}</th>
                                         <th>{{ $winner->transaction_amount }}</th>
-                                        <th>{{ $winner->platform->platform }}</th>
+                                        <th>{{ $winner->platform->platform ?? $winner->SmsShortcode }}</th>
                                     </tr>
                                 @endforeach
                             <tfoot>
