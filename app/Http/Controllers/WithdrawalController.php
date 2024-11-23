@@ -48,9 +48,12 @@ class WithdrawalController extends Controller
         return $curl_response;
     }
 
-    public function b2cPaymentRequest($phone, $amount, $platform)
+    public function b2cPaymentRequest($phone, $amount, $platformid)
     {
-        $platform = Platforms::find($platform);
+        $platform = Platforms::find($platformid);
+        if (! $platform) {
+            return response("request failed for platform $platformid");
+        }
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
         $ConversationID = $timestamp.'-'.$platform->outgoing->smsshortcode;
@@ -73,7 +76,7 @@ class WithdrawalController extends Controller
         ];
 
         try {
-            $response = json_decode($this->sendRequest($mpesaUrl, $data, $b2c));
+            $response = json_decode($this->sendRequest($mpesaUrl, $data, $platform->b2c));
 
             if (isset($response->errorCode)) {
                 // Log::info(json_encode($response));
