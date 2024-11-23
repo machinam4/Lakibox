@@ -49,7 +49,7 @@ class WithdrawalController extends Controller
 
     public function b2cPaymentRequest($phone, $amount, $platform)
     {
-        $platform = Platforms::find($platform)
+        $platform = Platforms::find($platform);
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
         $ConversationID = $timestamp.'-'.$platform->outgoing->smsshortcode;
