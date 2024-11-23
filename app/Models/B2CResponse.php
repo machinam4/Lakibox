@@ -27,4 +27,9 @@ class B2CResponse extends Model
         'b2c_working_account_available_funds',
         'SmsShortcode',
     ];
+
+    public function platform()
+    {
+        return $this->hasOne(Platforms::class, 'id', 'SmsShortcode');
+    }
 }

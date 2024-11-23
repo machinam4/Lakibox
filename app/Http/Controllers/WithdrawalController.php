@@ -56,7 +56,7 @@ class WithdrawalController extends Controller
         }
         $mpesaUrl = 'https://api.safaricom.co.ke/mpesa/b2c/v3/paymentrequest';
         $timestamp = now()->format('YmdHis');
-        $ConversationID = $timestamp.'-'.$platform->outgoing->shortcode;
+        $ConversationID = $timestamp.'-'.$platform;
         // Log::info($ConversationID);
         // Payload data to send with the request
         $data = [
