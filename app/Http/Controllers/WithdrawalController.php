@@ -119,7 +119,7 @@ class WithdrawalController extends Controller
 
     public function handleResult(Request $request)
     {
-        // Log::info('B2C Result Callback:', $request->all());
+        Log::info('B2C Result Callback:', $request->all());
 
         $data = $request->all();
 
