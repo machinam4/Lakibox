@@ -15,13 +15,13 @@ class BetsController extends Controller
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
-            'BusinessShortCode' => env('MPESA_SHORTCODE'),
-            'Password' => base64_encode($platform->paybill->secret.$platform->paybill->secret.$timestamp),
+            'BusinessShortCode' => $platform->paybill->shortcode,
+            'Password' => base64_encode($platform->paybill->secret.$platform->paybill->key.$timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $stakeAmount,
             'PartyA' => $phoneNumber,
-            'PartyB' => env('MPESA_SHORTCODE'),
+            'PartyB' => $platform->paybill->shortcode,
             'PhoneNumber' => $phoneNumber,
             'CallBackURL' => url('').'/api/c2b/express',
             'AccountReference' => "Box $box",
@@ -47,7 +47,7 @@ class BetsController extends Controller
                     'MerchantRequestID' => $response->MerchantRequestID,
                     'CheckoutRequestID' => $response->CheckoutRequestID,
                     'TransactionType' => 'CustomerPayBillOnline',
-                    'BusinessShortCode' => env('MPESA_SHORTCODE'),
+                    'BusinessShortCode' => $platform->paybill->shortcode,
                     'BillRefNumber' => "Box $box",
                     'MSISDN' => $phoneNumber,
                     'SmsShortcode' => $platform->id,
