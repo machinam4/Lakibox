@@ -76,7 +76,7 @@
                                     <tr>
 
                                         <th>{{ $radio->username }}</th>
-                                        <th>{{ $radio->role }}</th>
+                                        <th>{{ $radio->platform->platform ?? $radio->role }}</th>
                                         <th>{{ $radio->created_at }}</th>
                                     </tr>
                                 @endforeach
