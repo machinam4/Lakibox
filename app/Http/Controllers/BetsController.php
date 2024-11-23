@@ -11,7 +11,7 @@ class BetsController extends Controller
     {
         $stakeAmount = $stakeAmount ?? $platform->bet_minimum;
 
-        Log::info($platform);
+        Log::info($platform->paybill);
         // stk push
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
