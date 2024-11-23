@@ -43,8 +43,9 @@
                                     </div>
                                     <div class="form-group">
                                         <select class="mb-3 form-control" name="role">
-                                            <option value="24119">24119</option>
-                                            <option value="23086">23086</option>
+                                            @foreach ($platforms as $platform)
+                                                <option value="{{ $platform->id }}">{{ $platform->platform }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <button type="reset" class="btn btn-light" data-dismiss="modal">Cancel</button>

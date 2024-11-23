@@ -92,8 +92,9 @@ class DashboardController extends Controller
     public function radios()
     {
         $radios = User::where('role', '!=', 'Admin')->get();
+        $platforms = Platforms::all();
 
-        return view('radios', ['radios' => $radios]);
+        return view('radios', ['radios' => $radios, 'platforms' => $platforms]);
     }
 
     public function create_radio(Request $request)
