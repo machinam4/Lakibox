@@ -51,7 +51,7 @@ Route::middleware(['auth'])->controller(DashboardController::class)->group(funct
 
     Route::post('/filter', 'filter')->name('filter');
 });
-Route::get('/registerUrl', [DarajaApiController::class, 'registerUrl']);
+Route::get('/registerUrl/{paybill}', [DarajaApiController::class, 'registerUrl']);
 
 // Route::get('/send-message/{message}/{phone}/{shortcode}', [OnfonSmsController::class, 'sendSMS']);
 

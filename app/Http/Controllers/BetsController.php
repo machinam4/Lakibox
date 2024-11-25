@@ -13,15 +13,16 @@ class BetsController extends Controller
 
         // Log::info($platform->paybill);
         // stk push
+        $paybill = $platform->paybill;
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
         $data = [
             'BusinessShortCode' => $platform->paybill->shortcode,
-            'Password' => base64_encode($platform->paybill->shortcode.$platform->paybill->passkey.$timestamp),
+            'Password' => base64_encode($paybill->shortcode.$paybill->passkey.$timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $stakeAmount,
             'PartyA' => $phoneNumber,
-            'PartyB' => $platform->paybill->shortcode,
+            'PartyB' => $paybill->shortcode,
             'PhoneNumber' => $phoneNumber,
             'CallBackURL' => url('').'/api/c2b/express',
             'AccountReference' => "Box $box",
@@ -34,7 +35,7 @@ class BetsController extends Controller
 
         try {
             $sendStk = new DarajaApiController;
-            $response = $sendStk->STKPush($data);
+            $response = $sendStk->STKPush($data, $paybill);
             // Log::info(json_encode($response));
             if (! isset($response->ResponseCode)) {
                 return response()->json('failed', 200);
@@ -47,7 +48,7 @@ class BetsController extends Controller
                     'MerchantRequestID' => $response->MerchantRequestID,
                     'CheckoutRequestID' => $response->CheckoutRequestID,
                     'TransactionType' => 'CustomerPayBillOnline',
-                    'BusinessShortCode' => $platform->paybill->shortcode,
+                    'BusinessShortCode' => $paybill->shortcode,
                     'BillRefNumber' => "Box $box",
                     'MSISDN' => $phoneNumber,
                     'SmsShortcode' => $platform->id,
