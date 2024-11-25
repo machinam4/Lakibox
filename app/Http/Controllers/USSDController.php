@@ -16,7 +16,7 @@ class USSDController extends Controller
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
         $sms_shortcode = urldecode($data['serviceCode']);
-        // Log::info($sms_shortcode);
+        Log::info($sms_shortcode);
 
         $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
             $query->where('shortcode', $sms_shortcode);
