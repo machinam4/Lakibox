@@ -11,6 +11,8 @@ class USSDController extends Controller
 {
     public function handle(Request $request)
     {
+        Log::info($request->all());
+
         $data = $request->all();
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
@@ -76,6 +78,7 @@ class USSDController extends Controller
 
     public function handle245(Request $request)
     {
+        Log::info($request->all());
         $data = $request->all();
 
         // Log::info($data);
