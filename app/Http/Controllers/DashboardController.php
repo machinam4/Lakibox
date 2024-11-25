@@ -54,7 +54,9 @@ class DashboardController extends Controller
             $totalWinnings = B2CResponse::whereDate('created_at', date('Y-m-d'))->where('SmsShortcode', Auth::user()->role)->sum('transaction_amount');
         }
 
-        return view('players', ['last_index' => $last_index->id, 'players' => $players, 'totalWinnings' => $totalWinnings]);
+        $platforms = Platforms::all();
+
+        return view('players', ['last_index' => $last_index->id, 'players' => $players, 'totalWinnings' => $totalWinnings, 'platforms' => $platforms]);
     }
 
     public function online($index)

@@ -78,8 +78,9 @@
                                     @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Developer')
                                         <div class="form-group">
                                             <select class="mb-3 form-control" name="role">
-                                                <option value="24119">24119</option>
-                                                <option value="23086">23086</option>
+                                                @foreach ($platforms as $platform)
+                                                    <option value="{{ $platform->id }}">{{ $platform->platform }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     @endif
@@ -176,7 +177,7 @@
                                 player.BillRefNumber,
                                 player.TransAmount,
                                 player.TransID,
-                                player.SmsShortcode,
+                                player.platform.platform,
                                 // data
                             ]).draw(false);
                             index = player.id;
