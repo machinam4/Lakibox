@@ -11,14 +11,14 @@ class USSDController extends Controller
 {
     public function handle(Request $request)
     {
-        Log::info($request->all());
+        // Log::info($request->all());
 
         $data = $request->all();
         $message = $data['ussdString'] ?? null;
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
         $sms_shortcode = urldecode($data['serviceCode']);
-        Log::info($sms_shortcode);
+        // Log::info($sms_shortcode);
 
         $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
             $query->where('shortcode', $sms_shortcode);
@@ -78,7 +78,7 @@ class USSDController extends Controller
 
     public function handle245(Request $request)
     {
-        Log::info($request->all());
+        // Log::info($request->all());
         $data = $request->all();
 
         // Log::info($data);
