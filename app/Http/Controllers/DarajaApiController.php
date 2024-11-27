@@ -27,6 +27,8 @@ class DarajaApiController extends Controller
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
 
+        Log::info($response);
+
         return $response->access_token;
     }
 
