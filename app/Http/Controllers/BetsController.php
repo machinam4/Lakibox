@@ -36,7 +36,7 @@ class BetsController extends Controller
         try {
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data, $paybill);
-            // Log::info(json_encode($response));
+            Log::info(json_encode($response));
             if (! isset($response->ResponseCode)) {
                 return response()->json('failed', 200);
             }
@@ -53,7 +53,7 @@ class BetsController extends Controller
                     'MSISDN' => $phoneNumber,
                     'SmsShortcode' => $platform->id,
                 ];
-                // Log::info($res_data);
+                Log::info($res_data);
                 Deposits::Create($res_data);
                 // Log::info('stk sent');
             }
