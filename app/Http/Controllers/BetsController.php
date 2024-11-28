@@ -11,7 +11,7 @@ class BetsController extends Controller
     {
         $stakeAmount = $stakeAmount ?? $platform->bet_minimum;
 
-        // Log::info($platform->paybill);
+        Log::info($platform->paybill);
         // stk push
         $paybill = $platform->paybill;
         $timestamp = now()->setTimezone('UTC')->format('YmdHis');
@@ -36,7 +36,7 @@ class BetsController extends Controller
         try {
             $sendStk = new DarajaApiController;
             $response = $sendStk->STKPush($data, $paybill);
-            Log::info(json_encode($response));
+            // Log::info(json_encode($response));
             if (! isset($response->ResponseCode)) {
                 return response()->json('failed', 200);
             }
