@@ -5,6 +5,7 @@ use App\Http\Controllers\MPESAResponseController;
 use App\Http\Controllers\USSDController;
 use App\Http\Controllers\WithdrawalController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,13 @@ Route::post('/c2b/express', [MPESAResponseController::class, 'express']);
 
 Route::post('/MO/ussd', [USSDController::class, 'handle']); //handles onfon836
 Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
+
+//feltonsms
+// Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
+Route::post('/MO/ussd/437', function (Request $request) {
+    Log::info($request->all());
+});
+
 
 Route::post('/MO/sms/v2', [MOSmsController::class, 'handlev2']); //handles onfon
 
