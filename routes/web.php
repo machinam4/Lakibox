@@ -3,7 +3,10 @@
 use App\Http\Controllers\DarajaApiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OnfonSmsController;
+use App\Http\Controllers\USSDController;
 use App\Http\Controllers\WithdrawalController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,3 +60,12 @@ Route::get('/registerUrl/{paybill}', [DarajaApiController::class, 'registerUrl']
 
 //b2c test routes
 Route::get('/mpesa/b2c/{phone}/{amount}/{platformid}', [WithdrawalController::class, 'b2cPaymentRequest']);
+
+
+//feltonsms
+// Route::post('//MO/ussd', [USSDController::class, 'handleFelton']); //handles onfon836
+Route::post('//MO/ussd', function (Request $request) {
+    Log::info($request);
+});
+
+// https://lakibox.ridhishajamii.com//MO/ussd
