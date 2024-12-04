@@ -66,6 +66,7 @@ Route::get('/mpesa/b2c/{phone}/{amount}/{platformid}', [WithdrawalController::cl
 // Route::post('//MO/ussd', [USSDController::class, 'handleFelton']); //handles onfon836
 Route::post('//MO/ussd', function (Request $request) {
     Log::info($request->all());
+    return "Bad Endpoint";
 });
 
 // https://lakibox.ridhishajamii.com//MO/ussd

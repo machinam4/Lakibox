@@ -31,9 +31,10 @@ Route::post('/MO/ussd', [USSDController::class, 'handle']); //handles onfon836
 Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
 
 //feltonsms
-// Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
+// Route::post('/MO/ussd/437', [USSDController::class, 'handle245']); //handles onfon
 Route::post('/MO/ussd/437', function (Request $request) {
     Log::info($request->all());
+    return "END Accepted for Processing";
 });
 
 
