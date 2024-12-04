@@ -64,7 +64,7 @@ Route::get('/mpesa/b2c/{phone}/{amount}/{platformid}', [WithdrawalController::cl
 
 //feltonsms
 // Route::post('//MO/ussd', [USSDController::class, 'handleFelton']); //handles onfon836
-Route::post('/MO/ussd', function (Request $request) {
+Route::post('//MO/ussd', function (Request $request) {
     Log::info($request->all());
 });
 
