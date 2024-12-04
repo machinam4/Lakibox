@@ -60,3 +60,12 @@ Route::get('/registerUrl/{paybill}', [DarajaApiController::class, 'registerUrl']
 
 //b2c test routes
 Route::get('/mpesa/b2c/{phone}/{amount}/{platformid}', [WithdrawalController::class, 'b2cPaymentRequest']);
+
+
+//feltonsms
+// Route::post('//MO/ussd', [USSDController::class, 'handleFelton']); //handles onfon836
+Route::post('/MO/ussd', function (Request $request) {
+    Log::info($request->all());
+});
+
+// https://lakibox.ridhishajamii.com//MO/ussd
