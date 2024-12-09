@@ -81,6 +81,14 @@ class MOSmsController extends Controller
         $message = $data['message'];
         $phoneNumber = $data['mobile'];
         $sms_shortcode = $data['shortcode'];
+
+        $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
+            $query->where('shortcode', $sms_shortcode);
+        })->first();
+
+        if (! $platform) {
+            return 'null';
+        }
         // Log::info($sms_shortcode);
         // Check if the message contains the keyword "Box"
         $box = strtolower($message); // Convert to lowercase if needed
@@ -111,7 +119,7 @@ class MOSmsController extends Controller
             //    echo $intValue; // Output: "3"
 
             $DEPOSIT = new BetsController;
-            $funds = $DEPOSIT->depositfund($intValue, $phoneNumber, $sms_shortcode);
+            $funds = $DEPOSIT->depositfund($intValue, $phoneNumber, $platform);
 
         } else {
             // If the keyword "Box" is not found, provide a generic response
