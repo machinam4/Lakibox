@@ -12,6 +12,8 @@ class MOSmsController extends Controller
 
         $data = $request->all();
 
+        Log::info($data);
+
         return response()->json([
             'result_message' => 'Karibu working',
             'result_code' => 0,
