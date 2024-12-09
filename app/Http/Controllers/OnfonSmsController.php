@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+
 class OnfonSmsController extends Controller
 {
     // bulk.ke sms sending
     public function sendSMS($message, $phone, $outgoing)
     {
+
+        Log::info('sending reply');
         $curl = curl_init();
 
         // Prepare the data as an associative array
