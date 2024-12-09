@@ -88,7 +88,7 @@ class MOSmsController extends Controller
         })->first();
 
         if ($platform) {
-            Log::info($sms_shortcode);
+            // Log::info($sms_shortcode);
             // Check if the message contains the keyword "Box"
             $box = strtolower($message); // Convert to lowercase if needed
             if ($box == 'box') {
