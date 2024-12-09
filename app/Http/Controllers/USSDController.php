@@ -66,7 +66,7 @@ class USSDController extends Controller
             } else {
                 // Respond to the SMS
                 $sms = "CON Umekosea!.\n**\nUlichagua $message.\n**\nCheza kwa kuchagua NUMBER (1-5).\n**\nMfano: 1\n**\nChagua TENA USHINDE!\n1:BOX 1\n2:BOX 2\n3:BOX 3\n4:BOX4\n5:BOX5\n**\**\nACC Bal: 0!";
-n
+
                 return response($sms);
             }
         } else {
