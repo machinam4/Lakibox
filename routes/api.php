@@ -42,7 +42,7 @@ Route::post('/MO/sms/v2', [MOSmsController::class, 'handlev2']); //handles onfon
 
 //other providers
 
-Route::post('/MO/sms', [MOSmsController::class, 'handle']);
+Route::post('/MO/sms', [MOSmsController::class, 'handlev2']); //handles bulk ke
 Route::post('/MO/ussd/v2', [USSDController::class, 'handle']);
 
 // b2c routes
