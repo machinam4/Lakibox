@@ -56,7 +56,7 @@ class OnfonSmsController extends Controller
         }
 
         curl_close($curl);
-        // Log::info($response);
+        Log::info($response);
 
         // Return the response
         return $response;
