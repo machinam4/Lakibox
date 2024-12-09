@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Platforms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
