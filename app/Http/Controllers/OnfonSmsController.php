@@ -9,8 +9,6 @@ class OnfonSmsController extends Controller
     // bulk.ke sms sending
     public function sendSMS($message, $phone, $outgoing)
     {
-
-        Log::info('sending reply');
         $curl = curl_init();
 
         // Prepare the data as an associative array
@@ -36,7 +34,6 @@ class OnfonSmsController extends Controller
             'message' => $message,
         ];
 
-        Log::info($data);
         curl_setopt_array($curl, [
             CURLOPT_URL => $outgoing->api_url,
             CURLOPT_RETURNTRANSFER => true,
@@ -59,11 +56,11 @@ class OnfonSmsController extends Controller
         if (curl_errno($curl)) {
             // Log the error message
             echo 'Error:'.curl_error($curl);
-            Log::error('Error:'.curl_error($curl));
+            // Log::error('Error:'.curl_error($curl));
         }
 
         curl_close($curl);
-        Log::info($response);
+        // Log::info($response);
 
         // Return the response
         return $response;

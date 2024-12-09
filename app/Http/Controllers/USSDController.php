@@ -18,7 +18,7 @@ class USSDController extends Controller
         $phoneNumber = $data['msisdn'];
         $sessionId = $data['sessionId'];
         $sms_shortcode = urldecode($data['serviceCode']);
-        // Log::info($sms_shortcode);
+        Log::info($sms_shortcode);
 
         $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
             $query->where('shortcode', $sms_shortcode);
@@ -35,7 +35,7 @@ class USSDController extends Controller
             // Retrieve or initialize the session state
             $sessionState = Cache::get("ussd_session_state_{$sessionId}", 'start');
 
-            // Log::info('session state: '.$sessionState);
+            Log::info('session state: '.$sessionState);
 
             // Step 1: Welcome message and box selection
             if (is_null($message) && $sessionState === 'start') {
