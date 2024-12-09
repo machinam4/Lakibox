@@ -27,10 +27,12 @@ class OnfonSmsController extends Controller
             //bulk ke data object
             'mobile' => $phone,
             'response_type' => 'json',
-            'sender_name' => $shortcode,
+            'sender_name' => $outgoing->shortcode,
             'service_id' => 0,
             'message' => $message,
         ];
+
+        Log::info($data);
         curl_setopt_array($curl, [
             CURLOPT_URL => $outgoing->api_url,
             CURLOPT_RETURNTRANSFER => true,
