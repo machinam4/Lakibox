@@ -11,7 +11,7 @@ class USSDController extends Controller
 {
     public function handle(Request $request)
     {
-        // Log::info($request->all());
+        Log::info($request->all());
 
         $data = $request->all();
         $message = $data['ussdString'] ?? null;
