@@ -9,7 +9,13 @@ class MOSmsController extends Controller
 {
     public function handle(Request $request)
     {
+
         $data = $request->all();
+
+        return response()->json([
+            'result_message' => 'Karibu working',
+            'result_code' => 0,
+        ]);
         $message = $data['message'];
         $phoneNumber = $data['mobile'];
         $sms_shortcode = $data['shortcode'];
