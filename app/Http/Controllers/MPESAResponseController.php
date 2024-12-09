@@ -71,7 +71,7 @@ class MPESAResponseController extends Controller
 
             $BETS = new BetsController;
             $bet_result = $BETS->placeBet($bet->BillRefNumber, $bet->platform);
-            // Log::info($bet_result);
+            Log::info($bet_result);
             if ($bet_result['status'] == 'win') {
                 $sms = "Hongera!\n**\nUlichagua $bet->BillRefNumber\n**\nBox 1- ".$bet_result['values']['box1']."\nBox 2- ".$bet_result['values']['box2']."\nBox 3- ".$bet_result['values']['box3']."\nBox 4- ".$bet_result['values']['box4']."\nBox 5- ".$bet_result['values']['box5']."\n**\n**\nPiga ".$bet->platform->incoming->shortcode.' Kujaribu tena.';
                 // send winnings
