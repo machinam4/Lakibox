@@ -23,6 +23,13 @@ class OnfonSmsController extends Controller
             ],
             'ApiKey' => $outgoing->api_key, // Replace with your API key
             'ClientId' => $outgoing->api_user, // Replace with your client ID
+
+            //bulk ke data object
+            'mobile' => $phone,
+            'response_type' => 'json',
+            'sender_name' => $shortcode,
+            'service_id' => 0,
+            'message' => $message,
         ];
         curl_setopt_array($curl, [
             CURLOPT_URL => $outgoing->api_url,
@@ -35,7 +42,7 @@ class OnfonSmsController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode($data),  // Encode the array to JSON
             CURLOPT_HTTPHEADER => [
-                "AccessKey: $outgoing->api_url",
+                "AccessKey: $outgoing->api_key",
                 'Content-Type: application/json',
             ],
         ]);
