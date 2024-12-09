@@ -49,6 +49,7 @@ class OnfonSmsController extends Controller
             CURLOPT_POSTFIELDS => json_encode($data),  // Encode the array to JSON
             CURLOPT_HTTPHEADER => [
                 "AccessKey: $outgoing->api_key",
+                "h_api_key: $outgoing->api_key",
                 'Content-Type: application/json',
             ],
         ]);
