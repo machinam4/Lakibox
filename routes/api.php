@@ -28,8 +28,8 @@ Route::post('/c2b/validation', [MPESAResponseController::class, 'validation']);
 Route::post('/c2b/express', [MPESAResponseController::class, 'express']);
 
 Route::post('/MO/ussd', [USSDController::class, 'handle']); //handles onfon836
-Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
-
+// Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
+Route::post('/MO/ussd/245', [USSDController::class, 'proxyRequest']); //handles onfon
 //feltonsms
 // Route::post('/MO/ussd/437', [USSDController::class, 'handle245']); //handles onfon
 Route::post('/MO/ussd/437', function (Request $request) {

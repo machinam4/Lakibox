@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Platforms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class USSDController extends Controller
@@ -87,7 +88,7 @@ class USSDController extends Controller
         $phoneNumber = $data['MSISDN'];
         $sessionId = $data['SESSION_ID'];
         $sms_shortcode = urldecode($data['SERVICE_CODE']);
-        Log::info($message);
+        // Log::info($sms_shortcode);
 
         $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
             $query->where('shortcode', $sms_shortcode);
@@ -179,4 +180,25 @@ class USSDController extends Controller
             // ]);
         }
     }
+
+
+    public function proxyRequest(Request $request)
+{
+    // Define the target URL
+    $targetUrl = 'https://shindika.ridhishajamii.com/api/ussd/receive';
+
+    // Capture the request data (headers, query parameters, or body)
+    $requestData = $request->all();
+
+    // Forward the request to the target URL
+    $response = Http::withHeaders($request->headers->all())
+        ->send($request->method(), $targetUrl, [
+            'query' => $request->query(), // For query parameters
+            'json' => $requestData,      // For JSON body (use 'form_params' for form data)
+        ]);
+
+    // Return the response to the client
+    return response($response->body(), $response->status())
+        ->withHeaders($response->headers());
+}
 }
