@@ -133,7 +133,7 @@ class DashboardController extends Controller
             ->limit(20);
 
         // Apply SmsShortcode filter if the role is not 'All'
-        if ($role !== 'All') {
+        if ($role !== 'ALL') {
             $totalTodayQuery->where('SmsShortcode', $role);
             $totalWinningsQuery->where('SmsShortcode', $role);
             $playersQuery->where('SmsShortcode', $role);
