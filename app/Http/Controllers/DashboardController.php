@@ -116,20 +116,41 @@ class DashboardController extends Controller
         $to_date = Carbon::parse($request->to_date);
         $role = Auth::user()->role;
 
+        // Check if the user is an Admin or Developer, allow them to specify the role
         if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Developer') {
             $role = $request->role;
         }
 
-        $dailyTotals = $dailyTotals = Deposits::select(
-            DB::raw('(sum(TransAmount)) as TransAmount'),
-            DB::raw("(DATE_FORMAT(TransTime, '%d-%M-%Y')) as TransTime")
-        )->groupBy(DB::raw("DATE_FORMAT(TransTime, '%d-%M-%Y')"))->where('SmsShortcode', $role)->get();
-        $totalToday = Deposits::where('TransTime', '>=', $from_date)->where('TransTime', '<=', $to_date)->where('SmsShortcode', $role)->sum('TransAmount');
-        $totalWinnings = B2CResponse::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->where('SmsShortcode', $role)->sum('transaction_amount');
-        $players = Deposits::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->where('ResultCode', 0)->where('SmsShortcode', $role)->with(['player', 'platform'])->orderBy('TransTime', 'DESC')->limit(20)->get();
+        // Modify queries based on the role
+        $totalTodayQuery = Deposits::where('TransTime', '>=', $from_date)->where('TransTime', '<=', $to_date);
 
-        return view('filter', ['players' => $players, 'totalToday' => $totalToday, 'totalWinnings' => $totalWinnings, 'fromDate' => $from_date,
-            'toDate' => $to_date, ]);
+        $totalWinningsQuery = B2CResponse::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
+
+        $playersQuery = Deposits::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)
+            ->where('ResultCode', 0)
+            ->with(['player', 'platform'])
+            ->orderBy('TransTime', 'DESC')
+            ->limit(20);
+
+        // Apply SmsShortcode filter if the role is not 'All'
+        if ($role !== 'All') {
+            $totalTodayQuery->where('SmsShortcode', $role);
+            $totalWinningsQuery->where('SmsShortcode', $role);
+            $playersQuery->where('SmsShortcode', $role);
+        }
+
+        // Execute the queries
+        $totalToday = $totalTodayQuery->sum('TransAmount');
+        $totalWinnings = $totalWinningsQuery->sum('transaction_amount');
+        $players = $playersQuery->get();
+
+        return view('filter', [
+            'players' => $players,
+            'totalToday' => $totalToday,
+            'totalWinnings' => $totalWinnings,
+            'fromDate' => $from_date,
+            'toDate' => $to_date,
+        ]);
     }
 
     public function paybills()
@@ -236,10 +257,13 @@ class DashboardController extends Controller
         $senders = MobileOutgoing::all();
         $incomings = MobileIncoming::all();
 
-        return view('platforms', ['platforms' => $platforms, 'paybills' => $paybills,
+        return view('platforms', [
+            'platforms' => $platforms,
+            'paybills' => $paybills,
             'b2cs' => $b2cs,
             'senders' => $senders,
-            'incomings' => $incomings]);
+            'incomings' => $incomings
+        ]);
     }
 
     public function create_platform(Request $request)

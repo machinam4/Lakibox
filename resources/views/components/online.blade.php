@@ -78,6 +78,7 @@
                                     @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Developer')
                                         <div class="form-group">
                                             <select class="mb-3 form-control" name="role">
+                                                <option value="ALL">ALL</option>
                                                 @foreach ($platforms as $platform)
                                                     <option value="{{ $platform->id }}">{{ $platform->platform }}</option>
                                                 @endforeach
