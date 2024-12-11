@@ -189,8 +189,9 @@ class BetsController extends Controller
 
         // Initialize the box values with random prizes
         $values = [];
+        shuffle($prizes);
         for ($i = 1; $i <= 5; $i++) {
-            $values["box$i"] = $prizes[array_rand($prizes)];
+            $values["box$i"] = $prizes[$i];
         }
 
         // Step 1: Determine if the player wins
