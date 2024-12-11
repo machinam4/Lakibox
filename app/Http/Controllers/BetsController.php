@@ -176,12 +176,13 @@ class BetsController extends Controller
     public function placeBet(string $box, $platform)
     {
         $prizes = [
+            number_format(round(random_int(10000, 50000), -4)),
             number_format(round(random_int(50000, 100000), -4)),
             number_format(round(random_int(100000, 199999), -3)),
             number_format(round(random_int(200000, 299999), -3)),
             number_format(round(random_int(300000, 399999), -3)),
             number_format(round(random_int(400000, 450000), -3)),
-            number_format(0), // Default 0 prize
+            // number_format(0), // Default 0 prize
         ];
 
         // Extract the selected box number (e.g., "Box 1" -> 1)
