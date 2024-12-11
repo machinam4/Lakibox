@@ -190,15 +190,18 @@ class USSDController extends Controller
     // Capture the request data (headers, query parameters, or body)
     $requestData = $request->all();
 
-    // Forward the request to the target URL
-    $response = Http::withHeaders($request->headers->all())
-        ->send($request->method(), $targetUrl, [
-            'query' => $request->query(), // For query parameters
-            'json' => $requestData,      // For JSON body (use 'form_params' for form data)
-        ]);
+    // // Forward the request to the target URL
+    // $response = Http::withHeaders($request->headers->all())
+    //     ->send($request->method(), $targetUrl, [
+    //         'query' => $request->query(), // For query parameters
+    //         'json' => $requestData,      // For JSON body (use 'form_params' for form data)
+    //     ]);
+
+        $response = Http::post($targetUrl, $requestData);
+        return $response;
 
     // Return the response to the client
-    return response($response->body(), $response->status())
-        ->withHeaders($response->headers());
+    // return response($response->body(), $response->status())
+    //     ->withHeaders($response->headers());
 }
 }
