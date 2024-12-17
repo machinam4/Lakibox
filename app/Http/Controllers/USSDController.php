@@ -88,7 +88,7 @@ class USSDController extends Controller
         $phoneNumber = $data['MSISDN'];
         $sessionId = $data['SESSION_ID'];
         $sms_shortcode = urldecode($data['SERVICE_CODE']);
-        // Log::info($sms_shortcode);
+        Log::info($sms_shortcode);
 
         $platform = Platforms::whereHas('incoming', function ($query) use ($sms_shortcode) {
             $query->where('shortcode', $sms_shortcode);
@@ -149,7 +149,7 @@ class USSDController extends Controller
                 $boxChoice = Cache::get("ussd_session_box_choice_{$sessionId}");
 
                 $sms = "END Umechagua Box: $boxChoice \n Stake: $stakeAmount.\nUjumbe wa M-Pesa utatumwa kwenye simu yako muda mfupi ujao.";
-
+                Log::info($sms);
                 $DEPOSIT = new BetsController;
                 $funds = $DEPOSIT->depositfund($boxChoice, $phoneNumber, $platform, $stakeAmount);
 
