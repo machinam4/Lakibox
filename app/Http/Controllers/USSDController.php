@@ -82,7 +82,7 @@ class USSDController extends Controller
         // Log::info($request->all());
 
         $data = $request->all();
-        
+
         $message = $data['USSD_STRING'] ?? null;
         $phoneNumber = $data['MSISDN'];
         $sessionId = $data['SESSION_ID'];
@@ -111,7 +111,7 @@ class USSDController extends Controller
             if (is_null($message) && $sessionState === 'start') {
                 Cache::put("ussd_session_state_{$sessionId}", 'select_box', now()->addMinutes(5)); //expires the already initialized session after five minutes if its inactive
 
-                $sms = "CON SHINDA mpaka 500,000!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
+                $sms = "CON SHEREKEA na hadi 500,000!\n**\nCHAGUA BOX MOJA.\n**\nBox 1\nBox 2\nBox 3\nBox 4\nBox 5\n**\nChomoka na PESA USHINDE sasa hivi!";
 
                 return response($sms);
 
