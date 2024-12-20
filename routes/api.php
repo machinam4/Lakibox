@@ -31,12 +31,12 @@ Route::post('/MO/ussd', [USSDController::class, 'handle']); //handles onfon836
 Route::post('/MO/ussd/245', [USSDController::class, 'handle245']); //handles onfon
 // Route::post('/MO/ussd/245', [USSDController::class, 'proxyRequest']); //handles onfon
 //feltonsms
-// Route::post('/MO/ussd/437', [USSDController::class, 'handle245']); //handles onfon
-Route::post('/MO/ussd/437', function (Request $request) {
-    Log::info($request->all());
+Route::post('/MO/ussd/437', [USSDController::class, 'handle437']); //handles onfon
+// Route::post('/MO/ussd/437', function (Request $request) {
+//     Log::info($request->all());
 
-    return 'END Accepted for Processing';
-});
+//     return 'END Accepted for Processing';
+// });
 
 Route::post('/MO/sms/v2', [MOSmsController::class, 'handlev2']); //handles onfon
 
